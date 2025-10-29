@@ -1,53 +1,53 @@
 .prenotazioni-page {
-  padding: $spacing-unit * 2;
+  padding: calc(var(--spacing-unit) * 2);
 
   .header-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-unit * 3;
+    margin-bottom: calc(var(--spacing-unit) * 3);
 
     h1 {
       font-size: 2em;
-      color: $text-color;
+      color: var(--text-color);
     }
 
     .header-actions {
       display: flex;
-      gap: $spacing-unit;
+      gap: var(--spacing-unit);
 
       button {
-        background-color: $primary-color;
+        background-color: var(--primary-color);
         color: white;
         border: none;
         border-radius: 4px;
-        padding: $spacing-unit $spacing-unit * 2;
+        padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
         display: flex;
         align-items: center;
         cursor: pointer;
         font-size: 1em;
 
         .material-symbols-outlined {
-          margin-right: $spacing-unit / 2;
+          margin-right: var(--spacing-unit) / 2;
           font-size: 1.2em;
         }
 
         &.analyze-button {
           background-color: #fff;
-          color: $text-color;
-          border: 1px solid $border-color;
+          color: var(--text-color);
+          border: 1px solid var(--border-color);
 
           .material-symbols-outlined {
-            color: $text-color;
+            color: var(--text-color);
           }
 
           &:hover {
-            background-color: $secondary-color;
+            background-color: var(--secondary-color);
           }
         }
 
         &:hover {
-          background-color: darken($primary-color, 10%);
+          background-color: var(--primary-color);
         }
       }
     }
@@ -57,14 +57,14 @@
     background-color: #e6f7ff; // Light blue
     border: 1px solid #91d5ff; // Blue border
     color: #0047b3; // Darker blue text
-    padding: $spacing-unit * 1.5;
+    padding: calc(var(--spacing-unit) * 1.5);
     border-radius: 4px;
     display: flex;
     align-items: flex-start;
-    margin-bottom: $spacing-unit * 3;
+    margin-bottom: calc(var(--spacing-unit) * 3);
 
     .material-symbols-outlined {
-      margin-right: $spacing-unit;
+      margin-right: var(--spacing-unit);
       font-size: 1.2em;
     }
 
@@ -77,12 +77,12 @@
     a {
       color: #0047b3;
       text-decoration: underline;
-      margin-left: $spacing-unit * 2;
+      margin-left: calc(var(--spacing-unit) * 2);
       white-space: nowrap;
     }
 
     .close-icon {
-      margin-left: $spacing-unit * 2;
+      margin-left: calc(var(--spacing-unit) * 2);
       cursor: pointer;
       font-size: 1em;
 
@@ -94,14 +94,14 @@
 
   .status-cards {
     display: flex;
-    gap: $spacing-unit * 2;
-    margin-bottom: $spacing-unit * 3;
+    gap: calc(var(--spacing-unit) * 2);
+    margin-bottom: calc(var(--spacing-unit) * 3);
 
     .card {
       background-color: #fff;
-      border: 1px solid $border-color;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: $spacing-unit * 2;
+      padding: calc(var(--spacing-unit) * 2);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -109,19 +109,19 @@
       min-width: 120px;
 
       span {
-        color: $text-light-color;
+        color: var(--text-light-color);
         font-size: 0.85em;
-        margin-bottom: $spacing-unit / 2;
+        margin-bottom: var(--spacing-unit) / 2;
       }
 
       strong {
         font-size: 1.5em;
-        color: $text-color;
+        color: var(--text-color);
       }
 
       &.active {
-        border-color: $primary-color;
-        box-shadow: 0 0 0 1px $primary-color;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 1px var(--primary-color);
       }
     }
   }
@@ -130,21 +130,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-unit * 3;
+    margin-bottom: calc(var(--spacing-unit) * 3);
     background-color: #fff;
-    padding: $spacing-unit * 2;
+    padding: calc(var(--spacing-unit) * 2);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 
     .filter-pills {
       display: flex;
-      gap: $spacing-unit;
+      gap: var(--spacing-unit);
 
       .pill {
-        background-color: $secondary-color;
-        color: $text-light-color;
+        background-color: var(--secondary-color);
+        color: var(--text-light-color);
         border-radius: 20px;
-        padding: $spacing-unit / 2 $spacing-unit * 1.5;
+        padding: calc(var(--spacing-unit) / 2) calc(var (--spacing-unit) * 1.5);
         display: flex;
         align-items: center;
         font-size: 0.85em;
@@ -152,36 +152,36 @@
 
         .material-symbols-outlined {
           font-size: 1em;
-          margin-right: $spacing-unit / 2;
+          margin-right: var(--spacing-unit) / 2;
         }
 
         &:hover {
-          background-color: darken($secondary-color, 5%);
+          background-color: var(--secondary-color);
         }
       }
     }
 
     .action-buttons {
       display: flex;
-      gap: $spacing-unit;
+      gap: var(--spacing-unit);
 
       button {
         background-color: #fff;
-        border: 1px solid $border-color;
+        border: 1px solid var(--border-color);
         border-radius: 4px;
-        padding: $spacing-unit $spacing-unit * 2;
+        padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
         display: flex;
         align-items: center;
         cursor: pointer;
-        color: $text-color;
+        color: var(--text-color);
 
         .material-symbols-outlined {
-          margin-right: $spacing-unit / 2;
+          margin-right: var(--spacing-unit) / 2;
           font-size: 1.1em;
         }
 
         &:hover {
-          background-color: $secondary-color;
+          background-color: var(--secondary-color);
         }
       }
     }
@@ -192,7 +192,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    margin-bottom: $spacing-unit * 3;
+    margin-bottom: calc(var(--spacing-unit) * 3);
 
     app-generic-table {
       width: 100%;
@@ -203,16 +203,18 @@
       }
 
       // Custom styling for columns, including checkbox and more_horiz
-      ::ng-deep th:first-child, ::ng-deep td:first-child {
+      ::ng-deep th:first-child,
+      ::ng-deep td:first-child {
         width: 40px;
         text-align: center;
-        padding: $spacing-unit;
+        padding: var(--spacing-unit);
       }
 
-      ::ng-deep th:last-child, ::ng-deep td:last-child {
+      ::ng-deep th:last-child,
+      ::ng-deep td:last-child {
         width: 40px;
         text-align: center;
-        padding: $spacing-unit;
+        padding: var(--spacing-unit);
       }
 
       ::ng-deep .status-badge {
@@ -221,13 +223,13 @@
         background-color: #e6ffe6; // Light green
         color: #008000; // Dark green
         border-radius: 12px;
-        padding: $spacing-unit / 2 $spacing-unit;
+        padding: var(--spacing-unit) / 2var (--spacing-unit);
         font-size: 0.8em;
         font-weight: bold;
 
         .material-symbols-outlined {
           font-size: 1em;
-          margin-right: $spacing-unit / 2;
+          margin-right: var(--spacing-unit) / 2;
         }
       }
     }
@@ -237,27 +239,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $text-light-color;
+    color: var(--text-light-color);
     font-size: 0.9em;
 
     .pagination-controls {
       button {
         background-color: #fff;
-        border: 1px solid $border-color;
+        border: 1px solid var(--border-color);
         border-radius: 4px;
-        padding: $spacing-unit $spacing-unit * 2;
-        margin-left: $spacing-unit;
+        padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+        margin-left: var(--spacing-unit);
         cursor: pointer;
-        color: $text-color;
+        color: var(--text-color);
 
         &.active {
-          background-color: $primary-color;
+          background-color: var(--primary-color);
           color: white;
-          border-color: $primary-color;
+          border-color: var(--primary-color);
         }
 
         &:hover {
-          background-color: $secondary-color;
+          background-color: var(--secondary-color);
         }
       }
     }

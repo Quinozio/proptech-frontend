@@ -4,20 +4,20 @@ table {
 
   th,
   td {
-    padding: $spacing-unit * 1.5;
+    padding: calc(var(--spacing-unit) * 1.5);
     text-align: left;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-color);
   }
 
   th {
-    background-color: $secondary-color;
-    color: $text-light-color;
+    background-color: var(--secondary-color);
+    color: var(--text-light-color);
     font-weight: bold;
     font-size: 0.9em;
   }
 
   td {
-    color: $text-color;
+    color: var(--text-color);
     font-size: 0.9em;
   }
 
