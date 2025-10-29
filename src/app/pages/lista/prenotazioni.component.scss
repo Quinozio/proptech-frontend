@@ -1,0 +1,265 @@
+.prenotazioni-page {
+  padding: $spacing-unit * 2;
+
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-unit * 3;
+
+    h1 {
+      font-size: 2em;
+      color: $text-color;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: $spacing-unit;
+
+      button {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: $spacing-unit $spacing-unit * 2;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1em;
+
+        .material-symbols-outlined {
+          margin-right: $spacing-unit / 2;
+          font-size: 1.2em;
+        }
+
+        &.analyze-button {
+          background-color: #fff;
+          color: $text-color;
+          border: 1px solid $border-color;
+
+          .material-symbols-outlined {
+            color: $text-color;
+          }
+
+          &:hover {
+            background-color: $secondary-color;
+          }
+        }
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  .info-alert {
+    background-color: #e6f7ff; // Light blue
+    border: 1px solid #91d5ff; // Blue border
+    color: #0047b3; // Darker blue text
+    padding: $spacing-unit * 1.5;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: $spacing-unit * 3;
+
+    .material-symbols-outlined {
+      margin-right: $spacing-unit;
+      font-size: 1.2em;
+    }
+
+    span {
+      flex-grow: 1;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+
+    a {
+      color: #0047b3;
+      text-decoration: underline;
+      margin-left: $spacing-unit * 2;
+      white-space: nowrap;
+    }
+
+    .close-icon {
+      margin-left: $spacing-unit * 2;
+      cursor: pointer;
+      font-size: 1em;
+
+      &:hover {
+        color: darken(#0047b3, 10%);
+      }
+    }
+  }
+
+  .status-cards {
+    display: flex;
+    gap: $spacing-unit * 2;
+    margin-bottom: $spacing-unit * 3;
+
+    .card {
+      background-color: #fff;
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      padding: $spacing-unit * 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1;
+      min-width: 120px;
+
+      span {
+        color: $text-light-color;
+        font-size: 0.85em;
+        margin-bottom: $spacing-unit / 2;
+      }
+
+      strong {
+        font-size: 1.5em;
+        color: $text-color;
+      }
+
+      &.active {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 1px $primary-color;
+      }
+    }
+  }
+
+  .filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-unit * 3;
+    background-color: #fff;
+    padding: $spacing-unit * 2;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+    .filter-pills {
+      display: flex;
+      gap: $spacing-unit;
+
+      .pill {
+        background-color: $secondary-color;
+        color: $text-light-color;
+        border-radius: 20px;
+        padding: $spacing-unit / 2 $spacing-unit * 1.5;
+        display: flex;
+        align-items: center;
+        font-size: 0.85em;
+        cursor: pointer;
+
+        .material-symbols-outlined {
+          font-size: 1em;
+          margin-right: $spacing-unit / 2;
+        }
+
+        &:hover {
+          background-color: darken($secondary-color, 5%);
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: $spacing-unit;
+
+      button {
+        background-color: #fff;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        padding: $spacing-unit $spacing-unit * 2;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: $text-color;
+
+        .material-symbols-outlined {
+          margin-right: $spacing-unit / 2;
+          font-size: 1.1em;
+        }
+
+        &:hover {
+          background-color: $secondary-color;
+        }
+      }
+    }
+  }
+
+  .table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: $spacing-unit * 3;
+
+    app-generic-table {
+      width: 100%;
+
+      ::ng-deep table {
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      // Custom styling for columns, including checkbox and more_horiz
+      ::ng-deep th:first-child, ::ng-deep td:first-child {
+        width: 40px;
+        text-align: center;
+        padding: $spacing-unit;
+      }
+
+      ::ng-deep th:last-child, ::ng-deep td:last-child {
+        width: 40px;
+        text-align: center;
+        padding: $spacing-unit;
+      }
+
+      ::ng-deep .status-badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: #e6ffe6; // Light green
+        color: #008000; // Dark green
+        border-radius: 12px;
+        padding: $spacing-unit / 2 $spacing-unit;
+        font-size: 0.8em;
+        font-weight: bold;
+
+        .material-symbols-outlined {
+          font-size: 1em;
+          margin-right: $spacing-unit / 2;
+        }
+      }
+    }
+  }
+
+  .pagination-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $text-light-color;
+    font-size: 0.9em;
+
+    .pagination-controls {
+      button {
+        background-color: #fff;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        padding: $spacing-unit $spacing-unit * 2;
+        margin-left: $spacing-unit;
+        cursor: pointer;
+        color: $text-color;
+
+        &.active {
+          background-color: $primary-color;
+          color: white;
+          border-color: $primary-color;
+        }
+
+        &:hover {
+          background-color: $secondary-color;
+        }
+      }
+    }
+  }
+}

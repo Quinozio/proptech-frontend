@@ -1,0 +1,204 @@
+.sidebar-container {
+  width: 250px;
+  background-color: #fff;
+  height: 100vh;
+  padding: calc(var(--spacing-unit) * 2);
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(var(--spacing-unit) * 3);
+
+  .logo {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+    border-radius: 4px;
+    margin-right: var(--spacing-unit);
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    color: var(--text-color);
+  }
+
+  .material-symbols-outlined {
+    margin-left: auto;
+    color: var(--text-light-color);
+    cursor: pointer;
+  }
+}
+
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+  padding: var(--spacing-unit);
+  margin-bottom: calc(var(--spacing-unit) * 3);
+
+  .material-symbols-outlined {
+    color: var(--text-light-color);
+    margin-right: var(--spacing-unit);
+  }
+
+  input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    color: var(--text-color);
+
+    &::placeholder {
+      color: var(--text-light-color);
+    }
+  }
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: var(--spacing-unit);
+
+      a {
+        display: flex;
+        align-items: center;
+        padding: var(--spacing-unit);
+        color: var(--text-light-color);
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+
+        .material-symbols-outlined {
+          margin-right: var(--spacing-unit);
+          font-size: 20px;
+        }
+
+        span {
+          font-size: 0.95em;
+        }
+
+        &.active {
+          background-color: var(--primary-color);
+          color: white;
+
+          .material-symbols-outlined {
+            color: var(--primary-color);
+          }
+        }
+
+        &:hover {
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+
+          .material-symbols-outlined {
+            color: var(--primary-color);
+          }
+        }
+
+        .expand-icon {
+            margin-left: auto;
+            font-size: 20px;
+        }
+      }
+
+      ul {
+        margin-top: var(--spacing-unit);
+        margin-left: calc(var(--spacing-unit) * 2);
+        padding-left: calc(var(--spacing-unit) * 2);
+        border-left: 1px solid var(--border-color);
+
+        li {
+          margin-bottom: var(--spacing-unit);
+
+          a {
+            color: var(--text-light-color);
+
+            &:hover {
+              color: var(--primary-color);
+            }
+
+            &.active {
+              color: var(--primary-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar-section {
+  margin-top: calc(var(--spacing-unit) * 2);
+  border-top: 1px solid var(--border-color);
+  padding-top: calc(var(--spacing-unit) * 2);
+
+  h3 {
+    color: var(--text-light-color);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    padding-left: calc(var(--spacing-unit) * 2);
+  }
+
+  ul {
+    li {
+      a {
+        padding-left: calc(var(--spacing-unit) * 2);
+      }
+    }
+  }
+}
+
+.sidebar-footer {
+  margin-top: calc(var(--spacing-unit) * 2);
+  border-top: 1px solid var(--border-color);
+  padding-top: calc(var(--spacing-unit) * 2);
+
+  .logout-button {
+    display: flex;
+    align-items: center;
+    color: var(--text-light-color);
+    text-decoration: none;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    padding-left: calc(var(--spacing-unit) * 2);
+    transition: color 0.3s ease;
+
+    .material-symbols-outlined {
+      margin-right: var(--spacing-unit);
+    }
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  .settings-button {
+    display: flex;
+    align-items: center;
+    color: var(--text-light-color);
+    text-decoration: none;
+    padding-left: calc(var(--spacing-unit) * 2);
+    transition: color 0.3s ease;
+
+    .material-symbols-outlined {
+      margin-right: var(--spacing-unit);
+    }
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}

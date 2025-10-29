@@ -1,0 +1,70 @@
+<div class="prenotazioni-page">
+  <div class="header-section">
+    <h1>Prenotazioni</h1>
+    <div class="header-actions">
+      <button class="create-payment-button"><i class="material-symbols-outlined">add</i> Crea pagamento</button>
+      <button class="analyze-button"><i class="material-symbols-outlined">analytics</i> Analizza</button>
+    </div>
+  </div>
+
+  <div class="info-alert">
+    <i class="material-symbols-outlined">lightbulb</i>
+    <span>Consiglio Le attività come la tua automatizzano la conformità IVA, tra cui la registrazione, la riscossione e la dichiarazione tramite Stripe Tax.</span>
+    <a href="#">Scopri Stripe Tax</a>
+    <i class="material-symbols-outlined close-icon">close</i>
+  </div>
+
+  <div class="status-cards">
+    <div class="card active">
+      <span>Tutto</span>
+      <strong>72</strong>
+    </div>
+    <div class="card">
+      <span>Riusciti</span>
+      <strong>72</strong>
+    </div>
+    <div class="card">
+      <span>Rimborsati</span>
+      <strong>0</strong>
+    </div>
+    <div class="card">
+      <span>Contestati</span>
+      <strong>0</strong>
+    </div>
+    <div class="card">
+      <span>Non riusciti</span>
+      <strong>0</strong>
+    </div>
+    <div class="card">
+      <span>Non acquisiti</span>
+      <strong>0</strong>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-pills">
+      <span class="pill"><i class="material-symbols-outlined">add</i> Data e ora</span>
+      <span class="pill"><i class="material-symbols-outlined">add</i> Importo</span>
+      <span class="pill"><i class="material-symbols-outlined">add</i> Valuta</span>
+      <span class="pill"><i class="material-symbols-outlined">add</i> Stato</span>
+      <span class="pill"><i class="material-symbols-outlined">add</i> Modalità di pagamento</span>
+      <span class="pill"><i class="material-symbols-outlined">add</i> Altri filtri</span>
+    </div>
+    <div class="action-buttons">
+      <button><i class="material-symbols-outlined">ios_share</i> Esporta</button>
+      <button><i class="material-symbols-outlined">settings</i> Modifica colonna</button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <app-generic-table [data]="tableData" [columns]="tableColumns"></app-generic-table>
+  </div>
+
+  <div class="pagination-section">
+    <span>Visualizzazione di 1-20 di 72 risultati</span>
+    <div class="pagination-controls">
+      <button class="prev-button">Precedente</button>
+      <button class="next-button active">Successiva</button>
+    </div>
+  </div>
+</div>

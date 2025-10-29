@@ -1,0 +1,24 @@
+.sub-menu {
+  display: flex;
+  background-color: #fff;
+  padding: var(--spacing-unit) 20px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+
+  a {
+    padding: var(--spacing-unit) 0;
+    margin-right: calc(var(--spacing-unit) * 3);
+    color: var(--text-light-color);
+    text-decoration: none;
+    font-weight: 500;
+
+    &.active {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}

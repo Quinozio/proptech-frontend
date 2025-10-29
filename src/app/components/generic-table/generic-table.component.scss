@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: $spacing-unit * 1.5;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+
+  th {
+    background-color: $secondary-color;
+    color: $text-light-color;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+
+  td {
+    color: $text-color;
+    font-size: 0.9em;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
