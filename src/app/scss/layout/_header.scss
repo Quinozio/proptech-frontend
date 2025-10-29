@@ -39,7 +39,7 @@
 
     .material-symbols-outlined {
       color: var(--text-light-color);
-      margin-left: var(--spacing-unit) * 2;
+      margin-left: calc(var(--spacing-unit) * 2);
       cursor: pointer;
 
       &:hover {
@@ -59,10 +59,10 @@
       justify-content: center;
       cursor: pointer;
       font-size: 1.5em;
-      margin-left: var(--spacing-unit) * 2;
+      margin-left: calc(var(--spacing-unit) * 2);
 
       &:hover {
-        background-color: darken(var(--primary-color), 10%);
+        background-color: var(--primary-color);
       }
 
       .material-symbols-outlined {
