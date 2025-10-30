@@ -1,14 +1,11 @@
-.table-container {
+.table-main-container {
   width: 100%;
-  overflow-x: auto;
-  position: relative;
-  padding-bottom: 50px; /* Altezza della paginazione sticky */
+  overflow: visible; /* Aggiunto overflow per lo scorrimento */
 }
 
 .proptech-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1rem;
 
   thead {
     background-color: #f5f5f5;
@@ -50,10 +47,15 @@
   width: 30px;
   text-align: center;
 }
+.table-container{
+  position: relative;
+  margin-bottom: -400px;
 
+}
 .pagination-sticky {
-  position: absolute;
-  bottom: 0;
+  position: sticky;
+  margin-top: 400px;
+  bottom: -20px;
   left: 0;
   width: 100%;
   background-color: #fff;
@@ -63,6 +65,7 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+  z-index: 10; /* Aggiunto z-index per assicurare la visibilità */
 
   .pagination-results {
     font-size: 0.9em;

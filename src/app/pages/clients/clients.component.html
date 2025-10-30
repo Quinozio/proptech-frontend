@@ -1,5 +1,11 @@
 <div class="clients-container">
-  <h1>Clienti</h1>
+  <div class="secondary-nav">
+    <h1>Clienti</h1>
+
+    <button>
+      <i class="material-symbols-outlined">add</i> Aggiungi cliente
+    </button>
+  </div>
   <!-- I filtri andranno qui -->
   <div class="filters-section">
     <app-client-filters></app-client-filters>
@@ -12,7 +18,14 @@
 
   <div class="pagination-controls">
     <span>{{ totalElements() }} risultati</span>
-    <button (click)="onPreviousPage()" [disabled]="currentPage() === 0">Precedente</button>
-    <button (click)="onNextPage()" [disabled]="currentPage() >= totalPages() - 1">Successiva</button>
+    <button (click)="onPreviousPage()" [disabled]="currentPage() === 0">
+      Precedente
+    </button>
+    <button
+      (click)="onNextPage()"
+      [disabled]="currentPage() >= totalPages() - 1"
+    >
+      Successiva
+    </button>
   </div>
 </div>

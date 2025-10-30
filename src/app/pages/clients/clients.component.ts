@@ -17,7 +17,7 @@ import {
 export class ClientsComponent implements OnInit {
   clients = signal<Customer[]>([]);
   currentPage = signal<number>(0);
-  pageSize = signal<number>(10);
+  pageSize = signal<number>(1);
   totalElements = signal<number>(0);
   totalPages = signal<number>(0);
   sort = signal<string[]>([]);
@@ -32,7 +32,7 @@ export class ClientsComponent implements OnInit {
     const filter: CustomerFilter = {
       page: this.currentPage(),
       size: this.pageSize(),
-      sort: this.sort(),
+      // sort: this.sort(),
     };
 
     this.clientsService.getCustomers(filter).subscribe({

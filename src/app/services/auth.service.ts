@@ -62,6 +62,9 @@ export class AuthService {
   hasValidAccessToken(): boolean {
     return this.oauthService.hasValidAccessToken();
   }
+  getAccessToken(): string {
+    return this.oauthService.getAccessToken();
+  }
 
   getIdentityClaims(): any {
     return this.oauthService.getIdentityClaims();
