@@ -5,6 +5,7 @@ import { AuthConfig, provideOAuthClient } from 'angular-oauth2-oidc';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { unauthorizedInterceptor } from './interceptors/unauthorized.interceptor';
 
 const apiScopes = [
   'user:read', 'user:create', 'user:update', 'user:delete',
@@ -33,7 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, unauthorizedInterceptor])),
     provideOAuthClient()
   ]
 };

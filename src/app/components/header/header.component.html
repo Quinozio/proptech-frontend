@@ -8,11 +8,7 @@
     <i class="material-symbols-outlined">help_center</i>
     <i class="material-symbols-outlined">notifications</i>
     <i class="material-symbols-outlined">settings</i>
-    <button class="create-button">
-      <i class="material-symbols-outlined">add</i>
-    </button>
-    <button class="logout-button" (click)="logout()">
-      <i class="material-symbols-outlined">logout</i>
-    </button>
+    <app-button icon="add" text="Crea prodotto" variant="primary"></app-button>
+    <app-button icon="logout" (clickEvent)="logout()" [iconOnly]="true" variant="secondary"></app-button>
   </div>
 </header>

@@ -48,6 +48,7 @@ export class SidebarComponent {
       ],
     },
     { icon: "people", label: "Clienti", route: "/clienti" },
+    { icon: "people", label: "Utenti", route: "/users" },
     {
       icon: "emoji_people",
       label: "Proprietari",

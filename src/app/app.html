@@ -1,1 +1,12 @@
-<router-outlet />
+<router-outlet></router-outlet>
+
+<app-dialog
+  [isOpen]="isOpenDialog()"
+  [title]="dialogTitle()"
+  [closeOnBackdropClick]="dialogService.closeOnBackdropClick()"
+  (closed)="closeDialog()"
+>
+  @if (dialogContentComponent()) {
+    <ng-container [ngComponentOutlet]="dialogContentComponent()"></ng-container>
+  }
+</app-dialog>

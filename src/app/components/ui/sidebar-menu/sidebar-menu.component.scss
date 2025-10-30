@@ -12,13 +12,15 @@
     transition: background-color 0.3s ease;
     z-index: 99;
     position: relative;
+    text-decoration: none;
+    color: var(--text-light-color);
     &:hover {
       background-color: #f5f6f8;
     }
 
     &.active {
-      background-color: #e0e0e0; // O un altro colore per indicare l'elemento attivo
-      color: var(--primary-color); // Colore del testo per l'elemento attivo
+      color: var(--primary-color);
+      font-weight: 600;
     }
 
     .menu-icon {

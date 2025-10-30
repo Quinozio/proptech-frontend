@@ -25,7 +25,7 @@
             />
           </td>
           } @for (column of columns(); track column.field) {
-          <td>{{ row[column.field] }}</td>
+          <td>{{ column.formatter ? column.formatter(row) : row[column.field] }}</td>
           }
         </tr>
         }
@@ -36,19 +36,19 @@
   <div class="pagination-sticky">
     <div class="pagination-results">{{ totalResults() }} risultati</div>
     <div class="pagination-controls">
-      <button
-        (click)="onPageChange(currentPage() - 1)"
+      <app-button
+        text="Precedente"
+        (clickEvent)="onPageChange(currentPage() - 1)"
         [disabled]="currentPage() === 1"
-      >
-        Precedente
-      </button>
+        variant="secondary"
+      ></app-button>
       <span>Pagina {{ currentPage() }} di {{ totalPages }}</span>
-      <button
-        (click)="onPageChange(currentPage() + 1)"
+      <app-button
+        text="Successiva"
+        (clickEvent)="onPageChange(currentPage() + 1)"
         [disabled]="currentPage() === totalPages"
-      >
-        Successiva
-      </button>
+        variant="secondary"
+      ></app-button>
     </div>
   </div>
   }

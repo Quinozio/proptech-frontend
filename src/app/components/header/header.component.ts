@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ButtonComponent } from '../ui/button/button.component';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [],
+  imports: [
+    ButtonComponent
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

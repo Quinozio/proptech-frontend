@@ -3,6 +3,7 @@ import { LoginComponent } from './components/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 import { ClientsComponent } from './pages/clients/clients.component';
+import { UsersComponent } from './pages/users/users.component';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { ArriviComponent } from './pages/lista/arrivi.component';
 import { ListaComponent } from './pages/lista/lista.component';
@@ -19,6 +20,7 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: Dashboard },
             { path: 'clienti', component: ClientsComponent },
+            { path: 'users', component: UsersComponent },
             {
                 path: 'lista',
                 component: ListaComponent,

@@ -1,14 +1,16 @@
 import { Component, ChangeDetectionStrategy, EventEmitter, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button/button.component';
 
-interface Column {
+export interface Column {
   field: string;
   header: string;
+  formatter?: (data: any) => string; // Aggiungo la proprietà formatter opzionale
 }
 
 @Component({
   selector: 'app-table',
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -17,7 +19,7 @@ export class TableComponent {
   columns = input<Column[]>([]);
   data = input<any[]>([]);
   paginated = input(false);
-  selectable = input(false);
+  selectable = input(true);
   totalResults = input(0);
   currentPage = input(1);
   itemsPerPage = input(10);

@@ -1,17 +1,17 @@
-<div class="clients-container">
+<div class="users-container">
   <div class="secondary-nav">
-    <h1>Clienti</h1>
+    <h1>Utenti</h1>
 
-    <app-button icon="add" text="Aggiungi cliente" (clickEvent)="openAddClient()" variant="primary"></app-button>
+    <app-button icon="add" text="Aggiungi utente" (clickEvent)="openAddUser()" variant="primary"></app-button>
   </div>
   <!-- I filtri andranno qui -->
   <div class="filters-section">
-    <app-client-filters></app-client-filters>
+    <app-user-filters></app-user-filters>
   </div>
 
   <!-- La tabella andrà qui -->
   <div class="table-section">
-    <app-table [data]="clients()" [columns]="clientColumnDefinitions"></app-table>
+    <app-table [data]="users()" [columns]="userColumnDefinitions"></app-table>
   </div>
 
   <div class="pagination-controls">

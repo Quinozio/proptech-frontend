@@ -1,11 +1,4 @@
-@use './abstracts/variables';
+@use "abstracts/variables" as *;
 @use './abstracts/mixins';
 @use './base/base';
 @use './base/typography';
-@use './components/login';
-// @import //'./components/submenu/sub-menu';
-// @import './components/generic-table/generic-table';
-@use './layout/sidebar';
-@use './layout/header';
-// @import './pages/clienti';
-// @import './pages/lista/prenotazioni';

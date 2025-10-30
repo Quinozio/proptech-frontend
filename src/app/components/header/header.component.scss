@@ -1,0 +1,97 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--spacing-unit) * 2);
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+    width: 400px;
+
+    .material-symbols-outlined {
+      color: var(--text-light-color);
+      margin-right: var(--spacing-unit);
+    }
+
+    input {
+      border: none;
+      background: none;
+      outline: none;
+      width: 100%;
+      color: var(--text-color);
+
+      &::placeholder {
+        color: var(--text-light-color);
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+
+    .material-symbols-outlined {
+      color: var(--text-light-color);
+      margin-left: calc(var(--spacing-unit) * 2);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+
+    .create-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5em;
+      margin-left: calc(var(--spacing-unit) * 2);
+
+      &:hover {
+        background-color: var(--primary-color);
+      }
+
+      .material-symbols-outlined {
+        margin: 0;
+        color: white;
+      }
+    }
+
+    .logout-button {
+      background-color: #dc3545; // A red color for logout
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1em;
+      margin-left: var(--spacing-unit);
+
+      .material-symbols-outlined {
+        margin-right: calc(var(--spacing-unit) / 2);
+        font-size: 1.2em;
+        color: white;
+      }
+
+      &:hover {
+        background-color: #dc3545;
+      }
+    }
+  }
+}

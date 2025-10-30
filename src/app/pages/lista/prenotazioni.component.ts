@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../components/ui/table/table.component';
+import { ButtonComponent } from '../../components/ui/button/button.component';
  
 @Component({
   selector: 'app-prenotazioni',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableComponent, ButtonComponent],
   templateUrl: './prenotazioni.component.html',
   styleUrl: './prenotazioni.component.scss'
 })

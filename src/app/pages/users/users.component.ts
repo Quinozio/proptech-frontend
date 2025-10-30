@@ -1,25 +1,25 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
-import { ClientFiltersComponent } from "../../components/clients/client-filters/client-filters.component";
+import { UserFiltersComponent } from "../../components/users/user-filters/user-filters.component";
 import {
-  ClientsService,
-  Customer,
-  CustomerFilter,
-  CustomerPage,
-} from "../../services/clients.service";
+  UsersService,
+  User,
+  UserFilter,
+  UserPage,
+} from "../../services/users.service";
 import { DialogService } from "../../services/dialog.service";
-import { AddClient } from "../../components/clients/add-client/add-client";
+import { AddUser } from "../../components/users/add-user/add-user";
 import { Column, TableComponent } from "../../components/ui/table/table.component";
 import { ButtonComponent } from "../../components/ui/button/button.component";
 
 @Component({
-  selector: "app-clients",
+  selector: "app-users",
   standalone: true,
-  imports: [ClientFiltersComponent, TableComponent, ButtonComponent],
-  templateUrl: "./clients.component.html",
-  styleUrl: "./clients.component.scss",
+  imports: [UserFiltersComponent, TableComponent, ButtonComponent],
+  templateUrl: "./users.component.html",
+  styleUrl: "./users.component.scss",
 })
-export class ClientsComponent implements OnInit {
-  clients = signal<Customer[]>([]);
+export class UsersComponent implements OnInit {
+  users = signal<User[]>([]);
   currentPage = signal<number>(0);
   pageSize = signal<number>(1);
   totalElements = signal<number>(0);
@@ -28,52 +28,52 @@ export class ClientsComponent implements OnInit {
 
   dialogService = inject(DialogService);
 
-  constructor(private clientsService: ClientsService) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.loadClients();
+    this.loadUsers();
   }
 
-  loadClients(): void {
-    const filter: CustomerFilter = {
+  loadUsers(): void {
+    const filter: UserFilter = {
       page: this.currentPage(),
       size: this.pageSize(),
       // sort: this.sort(),
     };
 
-    this.clientsService.getCustomers(filter).subscribe({
-      next: (data: CustomerPage) => {
-        this.clients.set(data.content);
+    this.usersService.getUsers(filter).subscribe({
+      next: (data: UserPage) => {
+        this.users.set(data.content);
         this.currentPage.set(data.page.number);
         this.pageSize.set(data.page.size);
         this.totalElements.set(data.page.totalElements);
         this.totalPages.set(data.page.totalPages);
       },
       error: (err) => {
-        console.error("Error loading clients", err);
+        console.error("Error loading users", err);
       },
     });
   }
 
   onPreviousPage(): void {
     this.currentPage.update((page) => Math.max(0, page - 1));
-    this.loadClients();
+    this.loadUsers();
   }
 
   onNextPage(): void {
     this.currentPage.update((page) =>
       Math.min(this.totalPages() - 1, page + 1)
     );
-    this.loadClients();
+    this.loadUsers();
   }
 
-  openAddClient() {
-    this.dialogService.open(AddClient);
+  openAddUser() {
+    this.dialogService.open(AddUser);
   }
 
-  clientColumnDefinitions: Column[] = [
-    { field: "displayName", header: "Nome" },
+  userColumnDefinitions: Column[] = [
+    { field: "username", header: "Username" },
     { field: "email", header: "Email" },
-    { field: "customerType", header: "Modalità di pagamento predefinita" },
+    { field: "roles", header: "Ruoli", formatter: (data: any) => data.roles.map((role: any) => role.name).join(', ') },
   ];
 }

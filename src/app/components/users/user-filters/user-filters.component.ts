@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '../../ui/button/button.component';
 
 @Component({
-  selector: 'app-client-filters',
+  selector: 'app-user-filters',
   imports: [
     ButtonComponent
   ],
-  templateUrl: './client-filters.component.html',
-  styleUrl: './client-filters.component.scss'
+  templateUrl: './user-filters.component.html',
+  styleUrl: './user-filters.component.scss'
 })
-export class ClientFiltersComponent {
+export class UserFiltersComponent {
 
 }

@@ -1,0 +1,11 @@
+<div class="dialog-container" role="dialog" aria-modal="true" [attr.aria-labelledby]="title()">
+  <div class="dialog-header">
+    @if (title()) {
+      <h2 class="dialog-title">{{ title() }}</h2>
+    }
+    <app-button icon="close" (clickEvent)="close()" [iconOnly]="true" variant="secondary" aria-label="Close dialog"></app-button>
+  </div>
+  <div class="dialog-content">
+    <ng-content></ng-content>
+  </div>
+</div>
