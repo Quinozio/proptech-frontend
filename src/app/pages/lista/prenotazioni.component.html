@@ -57,14 +57,16 @@
   </div>
 
   <div class="table-container">
-    <app-generic-table [data]="tableData" [columns]="tableColumns"></app-generic-table>
+    <app-table
+      [data]="tableData"
+      [columns]="tableColumns"
+      [paginated]="true"
+      [selectable]="true"
+      [totalResults]="72"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)">
+    </app-table>
   </div>
 
-  <div class="pagination-section">
-    <span>Visualizzazione di 1-20 di 72 risultati</span>
-    <div class="pagination-controls">
-      <button class="prev-button">Precedente</button>
-      <button class="next-button active">Successiva</button>
-    </div>
-  </div>
+  
 </div>

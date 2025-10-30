@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { GenericTableComponent } from '../../components/generic-table/generic-table.component';
-
+import { TableComponent } from '../../components/ui/table/table.component';
+ 
 @Component({
   selector: 'app-prenotazioni',
   standalone: true,
-  imports: [GenericTableComponent],
+  imports: [TableComponent],
   templateUrl: './prenotazioni.component.html',
   styleUrl: './prenotazioni.component.scss'
 })
@@ -24,12 +24,20 @@ export class PrenotazioniComponent {
   ];
 
   tableColumns = [
-    { key: 'importo', label: 'Importo' },
-    { key: 'modalita', label: 'Modalità di pagamento' },
-    { key: 'descrizione', label: 'Descrizione' },
-    { key: 'cliente', label: 'Cliente' },
-    { key: 'data', label: 'Data' },
-    { key: 'dataRimborso', label: 'Data rimborso' },
-    { key: 'motivoRifiuto', label: 'Motivo del rifiuto' },
+    { field: 'importo', header: 'Importo' },
+    { field: 'modalita', header: 'Modalità di pagamento' },
+    { field: 'descrizione', header: 'Descrizione' },
+    { field: 'cliente', header: 'Cliente' },
+    { field: 'data', header: 'Data' },
+    { field: 'dataRimborso', header: 'Data rimborso' },
+    { field: 'motivoRifiuto', header: 'Motivo del rifiuto' },
   ];
+
+  currentPage: number = 1;
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    // Qui puoi aggiungere la logica per caricare i dati della nuova pagina
+    console.log('Pagina cambiata a:', this.currentPage);
+  }
 }

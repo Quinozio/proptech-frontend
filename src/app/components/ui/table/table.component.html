@@ -1,0 +1,39 @@
+<div class="table-container">
+  <table class="proptech-table">
+    <thead>
+      <tr>
+        @if (selectable()) {
+          <th class="checkbox-header"></th>
+        }
+        @for (column of columns(); track column.field) {
+          <th>{{ column.header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data(); track row.id) {
+        <tr (click)="toggleRowSelection(row)" [class.selected]="selectable() && isRowSelected(row)">
+          @if (selectable()) {
+            <td class="checkbox-cell">
+              <input type="checkbox" [checked]="isRowSelected(row)" (click)="$event.stopPropagation()">
+            </td>
+          }
+          @for (column of columns(); track column.field) {
+            <td>{{ row[column.field] }}</td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (paginated()) {
+    <div class="pagination-sticky">
+      <div class="pagination-results">{{ totalResults() }} risultati</div>
+      <div class="pagination-controls">
+        <button (click)="onPageChange(currentPage() - 1)" [disabled]="currentPage() === 1">Precedente</button>
+        <span>Pagina {{ currentPage() }} di {{ totalPages }}</span>
+        <button (click)="onPageChange(currentPage() + 1)" [disabled]="currentPage() === totalPages">Successiva</button>
+      </div>
+    </div>
+  }
+</div>

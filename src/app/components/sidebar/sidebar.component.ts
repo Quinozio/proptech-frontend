@@ -1,36 +1,125 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { SidebarMenuComponent } from "../ui/sidebar-menu/sidebar-menu.component";
+import { Router } from "@angular/router"; // Import Router
+import { Component } from "@angular/core";
+
+interface MenuItem {
+  label: string;
+  icon?: string;
+  route?: string;
+  children?: MenuItem[];
+}
 
 @Component({
-  selector: 'app-sidebar',
+  selector: "app-sidebar",
   standalone: true,
-  imports: [RouterModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  imports: [RouterModule, SidebarMenuComponent],
+  templateUrl: "./sidebar.component.html",
+  styleUrl: "./sidebar.component.scss",
 })
 export class SidebarComponent {
-  navigationItems = [
-    { icon: 'home', label: 'Pagina iniziale', route: '/' },
-    { icon: 'account_balance_wallet', label: 'Saldi', route: '/saldi' },
-    { icon: 'swap_horiz', label: 'Transazioni', route: '/transazioni' },
-    { icon: 'list_alt', label: 'Lista', route: '/lista' },
-    { icon: 'people', label: 'Clienti', route: '/clienti' },
-    { icon: 'category', label: 'Catalogo prodotti', route: '/prodotti' },
+  navigationItems: MenuItem[] = [
+    { icon: "dashboard", label: "Pagina iniziale", route: "/dashboard" },
+    {
+      icon: "calendar_month",
+      label: "Calendario",
+      route: "/calendario",
+    },
+    {
+      icon: "sell",
+      label: "Prezzi",
+      children: [
+        {
+          icon: "home_work",
+          label: "Prezzi appartamenti",
+          route: "/prezzi/prezzi-appartamenti",
+        },
+        {
+          icon: "person",
+          label: "Prezzi proprietari",
+          route: "/prezzi/prezzi-proprietari",
+        },
+        {
+          icon: "beach_access",
+          label: "Prezzi spiaggia",
+          route: "/prezzi/prezzi-spiaggia",
+        },
+      ],
+    },
+    { icon: "people", label: "Clienti", route: "/clienti" },
+    {
+      icon: "emoji_people",
+      label: "Proprietari",
+      route: "/proprietari",
+    },
   ];
 
-  quickLinks = [
-    { icon: 'schedule', label: 'Sigma', route: '/sigma' },
-    { icon: 'article', label: 'Report', route: '/report' },
+  appartamentiSection: MenuItem[] = [
+    { icon: "apartment", label: "Residence", route: "/residence" },
+    {
+      icon: "holiday_village",
+      label: "Appartamenti",
+      route: "/appartamenti",
+    },
   ];
 
-  productsMenu = [
-    { icon: 'payment', label: 'Payments', route: '/payments' },
-    { icon: 'receipt_long', label: 'Billing', route: '/billing' },
-    { icon: 'bar_chart', label: 'Reportistica', route: '/reportistica' },
-  ];
+  listeSection: MenuItem = {
+    icon: "table_view",
+    label: "Liste",
+    children: [
+      {
+        icon: "assignment",
+        label: "Prenotazioni",
+        route: "/lista/prenotazioni",
+      },
+      { icon: "login", label: "Arrivi", route: "/lista/arrivi" },
+      { icon: "logout", label: "Partenze", route: "/lista/partenze" },
+      {
+        icon: "receipt",
+        label: "FatturePA",
+        route: "/lista/fatturePA",
+      },
+      {
+        icon: "payments",
+        label: "Stato Pagamenti",
+        route: "/lista/stato-pagamenti",
+      },
+      {
+        icon: "groups",
+        label: "Alloggiati",
+        route: "/lista/alloggiati",
+      },
+      { icon: "cached", label: "Cambi", route: "/lista/cambi" },
+      {
+        icon: "build",
+        label: "Cambi dei servizi",
+        route: "/lista/cambi-servizi",
+      },
+      {
+        icon: "euro",
+        label: "Tassa soggiorno",
+        route: "/lista/tassa-soggiorno",
+      },
+      {
+        icon: "request_quote",
+        label: "Fattura b",
+        route: "/lista/fattura-b",
+      },
+      {
+        icon: "receipt_long",
+        label: "Fatture c",
+        route: "/lista/fatture-c",
+      },
+      { icon: "hotel", label: "Sfitti", route: "/lista/sfitti" },
+    ],
+  };
 
-  otherMenu = [
-    { icon: 'more_horiz', label: 'Altro', route: '/altro' },
-  ];
+  constructor(private router: Router) {}
 
+  onMenuItemClicked(item: MenuItem): void {
+    if (item.route) {
+      this.router.navigate([item.route]);
+    }
+  }
 }

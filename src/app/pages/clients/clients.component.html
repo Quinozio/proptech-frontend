@@ -1,0 +1,18 @@
+<div class="clients-container">
+  <h1>Clienti</h1>
+  <!-- I filtri andranno qui -->
+  <div class="filters-section">
+    <app-client-filters></app-client-filters>
+  </div>
+
+  <!-- La tabella andrà qui -->
+  <div class="table-section">
+    <!-- <app-table [data]="clients()" [columnDefinitions]="clientColumnDefinitions"></app-table> -->
+  </div>
+
+  <div class="pagination-controls">
+    <span>{{ totalElements() }} risultati</span>
+    <button (click)="onPreviousPage()" [disabled]="currentPage() === 0">Precedente</button>
+    <button (click)="onNextPage()" [disabled]="currentPage() >= totalPages() - 1">Successiva</button>
+  </div>
+</div>

@@ -87,7 +87,7 @@
       font-size: 1em;
 
       &:hover {
-        color: darken(#0047b3, 10%);
+        color: #0047b3;
       }
     }
   }
@@ -193,46 +193,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     margin-bottom: calc(var(--spacing-unit) * 3);
-
-    app-generic-table {
-      width: 100%;
-
-      ::ng-deep table {
-        border-radius: 8px;
-        overflow: hidden;
-      }
-
-      // Custom styling for columns, including checkbox and more_horiz
-      ::ng-deep th:first-child,
-      ::ng-deep td:first-child {
-        width: 40px;
-        text-align: center;
-        padding: var(--spacing-unit);
-      }
-
-      ::ng-deep th:last-child,
-      ::ng-deep td:last-child {
-        width: 40px;
-        text-align: center;
-        padding: var(--spacing-unit);
-      }
-
-      ::ng-deep .status-badge {
-        display: inline-flex;
-        align-items: center;
-        background-color: #e6ffe6; // Light green
-        color: #008000; // Dark green
-        border-radius: 12px;
-        padding: var(--spacing-unit) / 2var (--spacing-unit);
-        font-size: 0.8em;
-        font-weight: bold;
-
-        .material-symbols-outlined {
-          font-size: 1em;
-          margin-right: var(--spacing-unit) / 2;
-        }
-      }
-    }
   }
 
   .pagination-section {

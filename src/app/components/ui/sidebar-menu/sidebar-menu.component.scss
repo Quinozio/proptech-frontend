@@ -1,0 +1,91 @@
+.accordion-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .menu-item {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 99;
+    position: relative;
+    &:hover {
+      background-color: #f5f6f8;
+    }
+
+    &.active {
+      background-color: #e0e0e0; // O un altro colore per indicare l'elemento attivo
+      color: var(--primary-color); // Colore del testo per l'elemento attivo
+    }
+
+    .menu-icon {
+      margin-right: 10px;
+    }
+    i {
+      font-size: 20px;
+
+      &.material-symbols-outlined:not(.arrow-icon) {
+        width: 30px;
+        margin-right: 0px;
+      }
+    }
+    .arrow-icon {
+      margin-left: auto;
+      transition: transform 0.3s ease-in-out;
+      transform: rotate(90deg);
+      &.expanded {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden; /* Important for animation */
+
+    z-index: 1;
+    .child-item {
+      padding-left: 30px; /* Indent children */
+    }
+  }
+
+  .enter-animation {
+    animation: slide-fade 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  @keyframes slide-fade {
+    from {
+      max-height: 0; /* Inizia con altezza massima a 0 */
+      opacity: 0;
+      transform: translateY(-50px); /* Parte leggermente più in alto */
+    }
+    to {
+      max-height: 300px; /* Un valore abbastanza grande per l'altezza massima */
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .leave-animation {
+    animation: slide-up-fade-out 0.3s ease-in-out forwards;
+    overflow: hidden;
+  }
+
+  @keyframes slide-up-fade-out {
+    from {
+      max-height: 300px; /* Inizia dall'altezza massima espansa */
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      max-height: 0; /* Si contrae ad altezza massima 0 */
+      opacity: 0;
+      transform: translateY(-50px); /* Si sposta verso l'alto e scompare */
+    }
+  }
+}

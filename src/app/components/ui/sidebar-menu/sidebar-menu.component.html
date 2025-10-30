@@ -1,0 +1,48 @@
+<ul class="accordion-menu">
+  @for (item of items; track item.label) {
+    <li [class.has-children]="item.children && item.children.length > 0">
+      @if (item.route && !(item.children && item.children.length > 0)) {
+        <a [routerLink]="item.route" routerLinkActive="active" class="menu-item" (click)="itemClicked.emit(item)">
+          @if (item.icon) {
+            <i class="material-symbols-outlined">{{ item.icon }}</i>
+          }
+          <span>{{ item.label }}</span>
+        </a>
+      } @else {
+        <div class="menu-item" (click)="toggleItem(item)">
+          @if (item.icon) {
+            <i class="material-symbols-outlined">{{ item.icon }}</i>
+          }
+          <span>{{ item.label }}</span>
+          @if (item.children && item.children.length > 0) {
+            <i class="material-symbols-outlined arrow-icon"
+               [class.expanded]="expandedItems()[item.label]">chevron_right</i>
+          }
+        </div>
+      }
+      @if (item.children && item.children.length > 0 && expandedItems()[item.label]) {
+        <ul class="submenu" animate.enter="enter-animation" animate.leave="leave-animation">
+          @for (child of item.children; track child.label) {
+            <li>
+              @if (child.route) {
+                <a [routerLink]="child.route" routerLinkActive="active" class="menu-item child-item" (click)="itemClicked.emit(child)">
+                  @if (child.icon) {
+                    <i class="material-symbols-outlined">{{ child.icon }}</i>
+                  }
+                  <span>{{ child.label }}</span>
+                </a>
+              } @else {
+                <div class="menu-item child-item" (click)="toggleItem(child)">
+                  @if (child.icon) {
+                    <i class="material-symbols-outlined">{{ child.icon }}</i>
+                  }
+                  <span>{{ child.label }}</span>
+                </div>
+              }
+            </li>
+          }
+        </ul>
+      }
+    </li>
+  }
+</ul>

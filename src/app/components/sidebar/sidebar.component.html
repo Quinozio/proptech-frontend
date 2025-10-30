@@ -5,69 +5,14 @@
     <i class="material-symbols-outlined">expand_more</i>
   </div>
 
-  <div class="sidebar-search">
-    <i class="material-symbols-outlined">search</i>
-    <input type="text" placeholder="Cerca">
-  </div>
-
   <nav class="sidebar-nav">
-    <ul>
-      @for (item of navigationItems; track item.label) {
-        <li>
-          <a [routerLink]="item.route" routerLinkActive="active">
-            <i class="material-symbols-outlined">{{ item.icon }}</i>
-            <span>{{ item.label }}</span>
-          </a>
-        </li>
-      }
-    </ul>
+    <app-sidebar-menu [items]="navigationItems" (itemClicked)="onMenuItemClicked($event)"></app-sidebar-menu>
 
-    <div class="sidebar-section">
-      <h3>Scelte rapide</h3>
-      <ul>
-        @for (item of quickLinks; track item.label) {
-          <li>
-            <a [routerLink]="item.route" routerLinkActive="active">
-              <i class="material-symbols-outlined">{{ item.icon }}</i>
-              <span>{{ item.label }}</span>
-            </a>
-          </li>
-        }
-      </ul>
-    </div>
+    <p class="menu-section-title">Appartamenti</p>
+    <app-sidebar-menu [items]="appartamentiSection" (itemClicked)="onMenuItemClicked($event)"></app-sidebar-menu>
 
-    <div class="sidebar-section">
-      <h3>Prodotti</h3>
-      <ul>
-        @for (item of productsMenu; track item.label) {
-          <li>
-            <a [routerLink]="item.route" routerLinkActive="active">
-              <i class="material-symbols-outlined">{{ item.icon }}</i>
-              <span>{{ item.label }}</span>
-              <i class="material-symbols-outlined expand-icon">expand_more</i>
-            </a>
-          </li>
-        }
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <ul>
-        @for (item of otherMenu; track item.label) {
-          <li>
-            <a [routerLink]="item.route" routerLinkActive="active">
-              <i class="material-symbols-outlined">{{ item.icon }}</i>
-              <span>{{ item.label }}</span>
-              <i class="material-symbols-outlined expand-icon">expand_more</i>
-            </a>
-          </li>
-        }
-      </ul>
-    </div>
+    <p class="menu-section-title">Liste</p>
+    <app-sidebar-menu [items]="[listeSection]" (itemClicked)="onMenuItemClicked($event)"></app-sidebar-menu>
   </nav>
 
-  <div class="sidebar-footer">
-    <i class="material-symbols-outlined">settings</i>
-    <span>Sviluppatori</span>
-  </div>
 </div>

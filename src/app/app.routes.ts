@@ -1,21 +1,24 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { ClientiComponent } from './pages/clienti/clienti.component';
 import { authGuard } from './guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
-import { ListaComponent } from './pages/lista/lista.component';
-import { PrenotazioniComponent } from './pages/lista/prenotazioni.component';
+import { ClientsComponent } from './pages/clients/clients.component';
+import { Dashboard } from './pages/dashboard/dashboard';
 import { ArriviComponent } from './pages/lista/arrivi.component';
+import { ListaComponent } from './pages/lista/lista.component';
 import { PartenzeComponent } from './pages/lista/partenze.component';
+import { PrenotazioniComponent } from './pages/lista/prenotazioni.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'after-login', redirectTo: 'dashboard', pathMatch: 'full' },
     {
-        path: 'dashboard', // This is the authenticated section
+        path: '', // This is the authenticated section
         component: LayoutComponent,
         canActivate: [authGuard],
         children: [
-            { path: 'clienti', component: ClientiComponent },
+            { path: 'dashboard', component: Dashboard },
+            { path: 'clienti', component: ClientsComponent },
             {
                 path: 'lista',
                 component: ListaComponent,
@@ -26,8 +29,8 @@ export const routes: Routes = [
                     { path: '', redirectTo: 'prenotazioni', pathMatch: 'full' }
                 ]
             },
-            { path: '', redirectTo: 'clienti', pathMatch: 'full' }
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },
-    { path: '**', redirectTo: 'login' } // Redirect any unmatched routes to login
+    { path: '**', redirectTo: 'dashboard' }
 ];
