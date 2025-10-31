@@ -6,7 +6,7 @@
   background-color: #fff;
   border-bottom: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-
+  --font-size-button-icon: 1.4rem;
   .search-container {
     display: flex;
     align-items: center;
@@ -36,10 +36,10 @@
   .header-actions {
     display: flex;
     align-items: center;
+    gap: 1rem;
 
     .material-symbols-outlined {
       color: var(--text-light-color);
-      margin-left: calc(var(--spacing-unit) * 2);
       cursor: pointer;
 
       &:hover {
@@ -93,5 +93,28 @@
         background-color: #dc3545;
       }
     }
+  }
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-lg);
+  height: var(--spacing-lg);
+  border-radius: var(--border-radius-sm);
+
+  &:hover {
+    background-color: var(--color-gray-100);
+  }
+
+  & .material-symbols-outlined {
+    font-size: var(--font-size-lg);
   }
 }

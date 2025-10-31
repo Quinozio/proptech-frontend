@@ -1,0 +1,15 @@
+<div
+  class="popover"
+  [style.left.px]="position().x"
+  [style.top.px]="position().y"
+>
+  <div class="popover-content">
+    @if (isTemplateRef(popoverContent() && popoverContent())) {
+    <ng-container *ngTemplateOutlet="popoverTemplate()"></ng-container>
+    } @else if (typeof popoverContent() === 'string') {
+    {{ popoverContent() }}
+    } @else {
+    <ng-content></ng-content>
+    }
+  </div>
+</div>

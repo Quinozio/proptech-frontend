@@ -1,14 +1,28 @@
 <header class="app-header">
   <div class="search-container">
     <i class="material-symbols-outlined">search</i>
-    <input type="text" placeholder="Cerca">
+    <input type="text" placeholder="Cerca" />
   </div>
   <div class="header-actions">
-    <i class="material-symbols-outlined">apps</i>
-    <i class="material-symbols-outlined">help_center</i>
-    <i class="material-symbols-outlined">notifications</i>
-    <i class="material-symbols-outlined">settings</i>
+    <app-button icon="apps" [iconOnly]="true" variant="secondary" />
+    <app-button icon="help_center" [iconOnly]="true" variant="secondary" />
+    <app-button
+      icon="notifications"
+      [iconOnly]="true"
+      variant="secondary"
+      [appPopover]="notificationsPopover"
+    >
+    </app-button>
+    <ng-template #notificationsPopover>
+      <p>Nessuna notifica</p>
+    </ng-template>
+    <app-button icon="settings" [iconOnly]="true" variant="secondary" />
     <app-button icon="add" text="Crea prodotto" variant="primary"></app-button>
-    <app-button icon="logout" (clickEvent)="logout()" [iconOnly]="true" variant="secondary"></app-button>
+    <app-button
+      icon="logout"
+      (clickEvent)="logout()"
+      [iconOnly]="true"
+      variant="secondary"
+    ></app-button>
   </div>
 </header>

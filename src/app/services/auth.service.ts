@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, combineLatest, from } from "rxjs";
-import { filter, map, tap, switchMap } from "rxjs/operators";
+import { BehaviorSubject, Observable, combineLatest, from, of } from "rxjs";
+import { filter, map, tap, switchMap, catchError } from "rxjs/operators";
 import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
 import { authConfig } from "../app.config"; // Import the authConfig from app.config
 
@@ -19,6 +19,13 @@ export class AuthService {
       tap(() => this._isDoneLoading$.next(true)),
       tap(() => this.loggedIn.next(this.oauthService.hasValidAccessToken())),
       tap(() => this._authReady$.next(true)),
+      catchError(error => {
+        console.error("AuthService - Errore nel caricamento del discovery document o nel login:", error);
+        this._isDoneLoading$.next(true); // Sblocca la guardia anche in caso di errore
+        this.loggedIn.next(false); // Imposta lo stato a non loggato
+        this._authReady$.next(true);
+        return of(false); // Ritorna un observable che emette false per completare il flusso
+      })
     ).subscribe();
 
     // Automatically renew token
@@ -46,7 +53,6 @@ export class AuthService {
     return combineLatest([this.authReady$, this.loggedIn]).pipe(
       filter(([authReady]) => authReady),
       map(([, isLoggedIn]) => isLoggedIn),
-      tap(isLoggedIn => console.log('AuthService - isLoggedIn emitted:', isLoggedIn))
     );
   }
 

@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { ButtonComponent } from '../ui/button/button.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewChild,
+  inject,
+} from "@angular/core";
+import { AuthService } from "../../services/auth.service";
+import { ButtonComponent } from "../ui/button/button.component";
+import { PopoverDirective } from "../ui/popover/popover.directive";
 
 @Component({
-  selector: 'app-header',
-  imports: [
-    ButtonComponent
-  ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  selector: "app-header",
+  standalone: true,
+  imports: [ButtonComponent, PopoverDirective],
+  templateUrl: "./header.component.html",
+  styleUrl: "./header.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-
-  constructor(private authService: AuthService) { }
+  authService = inject(AuthService);
 
   logout() {
     this.authService.logout();
