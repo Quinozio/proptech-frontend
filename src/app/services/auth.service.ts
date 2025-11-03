@@ -13,32 +13,32 @@ export class AuthService {
   private _authReady$ = new BehaviorSubject<boolean>(false);
 
   constructor(private oauthService: OAuthService) {
-    this.oauthService.configure(authConfig);
+    // this.oauthService.configure(authConfig);
 
-    from(this.oauthService.loadDiscoveryDocumentAndTryLogin()).pipe(
-      tap(() => this._isDoneLoading$.next(true)),
-      tap(() => this.loggedIn.next(this.oauthService.hasValidAccessToken())),
-      tap(() => this._authReady$.next(true)),
-      catchError(error => {
-        console.error("AuthService - Errore nel caricamento del discovery document o nel login:", error);
-        this._isDoneLoading$.next(true); // Sblocca la guardia anche in caso di errore
-        this.loggedIn.next(false); // Imposta lo stato a non loggato
-        this._authReady$.next(true);
-        return of(false); // Ritorna un observable che emette false per completare il flusso
-      })
-    ).subscribe();
+    // from(this.oauthService.loadDiscoveryDocumentAndTryLogin()).pipe(
+    //   tap(() => this._isDoneLoading$.next(true)),
+    //   tap(() => this.loggedIn.next(this.oauthService.hasValidAccessToken())),
+    //   tap(() => this._authReady$.next(true)),
+    //   catchError(error => {
+    //     console.error("AuthService - Errore nel caricamento del discovery document o nel login:", error);
+    //     this._isDoneLoading$.next(true); // Sblocca la guardia anche in caso di errore
+    //     this.loggedIn.next(false); // Imposta lo stato a non loggato
+    //     this._authReady$.next(true);
+    //     return of(false); // Ritorna un observable che emette false per completare il flusso
+    //   })
+    // ).subscribe();
 
-    // Automatically renew token
-    this.oauthService.setupAutomaticSilentRefresh();
+    // // Automatically renew token
+    // this.oauthService.setupAutomaticSilentRefresh();
 
-    this.oauthService.events.subscribe(event => {
-      if (event.type === 'token_received' || event.type === 'token_refreshed') {
-        this.loggedIn.next(this.oauthService.hasValidAccessToken());
-      }
-      if (event.type === 'session_terminated' || event.type === 'logout') {
-        this.loggedIn.next(false);
-      }
-    });
+    // this.oauthService.events.subscribe(event => {
+    //   if (event.type === 'token_received' || event.type === 'token_refreshed') {
+    //     this.loggedIn.next(this.oauthService.hasValidAccessToken());
+    //   }
+    //   if (event.type === 'session_terminated' || event.type === 'logout') {
+    //     this.loggedIn.next(false);
+    //   }
+    // });
   }
 
   get isDoneLoading$(): Observable<boolean> {
@@ -50,14 +50,15 @@ export class AuthService {
   }
 
   get isLoggedIn(): Observable<boolean> {
-    return combineLatest([this.authReady$, this.loggedIn]).pipe(
-      filter(([authReady]) => authReady),
-      map(([, isLoggedIn]) => isLoggedIn),
-    );
+    return of(true);
+    // return combineLatest([this.authReady$, this.loggedIn]).pipe(
+    //   filter(([authReady]) => authReady),
+    //   map(([, isLoggedIn]) => isLoggedIn),
+    // );
   }
 
   login() {
-    this.oauthService.initCodeFlow();
+    // this.oauthService.initCodeFlow();
   }
 
   logout() {
