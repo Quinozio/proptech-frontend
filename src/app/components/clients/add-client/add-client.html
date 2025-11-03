@@ -1,1 +1,231 @@
-<p>add-client works!</p>
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  <div class="form-toggle">
+    <label>
+      <input type="checkbox" [formControl]="isBusinessClient" />
+      Cliente Aziendale
+    </label>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+      @if (clientForm.get('email')?.invalid && clientForm.get('email')?.touched) {
+        <div class="error-message">Email non valida</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Numero di Telefono:</label>
+      <input id="phoneNumber" type="text" formControlName="phoneNumber" />
+      @if (clientForm.get('phoneNumber')?.invalid && clientForm.get('phoneNumber')?.touched) {
+        <div class="error-message">Numero di telefono richiesto</div>
+      }
+    </div>
+  </div>
+
+  @if (!isBusinessClient.value) {
+    <h3>Dati Cliente Privato</h3>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="form-group">
+        <label for="firstName">Nome:</label>
+        <input id="firstName" type="text" formControlName="firstName" />
+        @if (clientForm.get('firstName')?.invalid && clientForm.get('firstName')?.touched) {
+          <div class="error-message">Nome richiesto</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Cognome:</label>
+        <input id="lastName" type="text" formControlName="lastName" />
+        @if (clientForm.get('lastName')?.invalid && clientForm.get('lastName')?.touched) {
+          <div class="error-message">Cognome richiesto</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="fiscalCodePrivate">Codice Fiscale:</label>
+        <input
+          id="fiscalCodePrivate"
+          type="text"
+          formControlName="fiscalCodePrivate"
+        />
+        @if (clientForm.get('fiscalCodePrivate')?.invalid && clientForm.get('fiscalCodePrivate')?.touched) {
+          <div class="error-message">Codice Fiscale richiesto</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="birthDate">Data di Nascita:</label>
+        <input id="birthDate" type="date" formControlName="birthDate" />
+        @if (clientForm.get('birthDate')?.invalid && clientForm.get('birthDate')?.touched) {
+          <div class="error-message">Data di nascita richiesta</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="birthPlace">Luogo di Nascita:</label>
+        <input id="birthPlace" type="text" formControlName="birthPlace" />
+        @if (clientForm.get('birthPlace')?.invalid && clientForm.get('birthPlace')?.touched) {
+          <div class="error-message">Luogo di nascita richiesto</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="nationality">Nazionalità:</label>
+        <input id="nationality" type="text" formControlName="nationality" />
+        @if (clientForm.get('nationality')?.invalid && clientForm.get('nationality')?.touched) {
+          <div class="error-message">Nazionalità richiesta</div>
+        }
+      </div>
+
+      <div formGroupName="billingAddressPrivate" class="full-width">
+        <h4>Indirizzo di Fatturazione (Privato)</h4>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="form-group">
+            <label for="streetPrivate">Via:</label>
+            <input id="streetPrivate" type="text" formControlName="street" />
+          </div>
+          <div class="form-group">
+            <label for="numberPrivate">Numero:</label>
+            <input id="numberPrivate" type="text" formControlName="number" />
+          </div>
+          <div class="form-group">
+            <label for="postalCodePrivate">CAP:</label>
+            <input id="postalCodePrivate" type="text" formControlName="postalCode" />
+          </div>
+          <div class="form-group">
+            <label for="cityPrivate">Città:</label>
+            <input id="cityPrivate" type="text" formControlName="city" />
+          </div>
+          <div class="form-group">
+            <label for="provincePrivate">Provincia:</label>
+            <input id="provincePrivate" type="text" formControlName="province" />
+          </div>
+          <div class="form-group">
+            <label for="countryPrivate">Paese:</label>
+            <input id="countryPrivate" type="text" formControlName="country" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (isBusinessClient.value) {
+    <h3>Dati Cliente Aziendale</h3>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="form-group">
+        <label for="companyName">Nome Azienda:</label>
+        <input id="companyName" type="text" formControlName="companyName" />
+        @if (clientForm.get('companyName')?.invalid && clientForm.get('companyName')?.touched) {
+          <div class="error-message">Nome Azienda richiesto</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="vatNumber">Partita IVA:</label>
+        <input id="vatNumber" type="text" formControlName="vatNumber" />
+        @if (clientForm.get('vatNumber')?.invalid && clientForm.get('vatNumber')?.touched) {
+          <div class="error-message">Partita IVA richiesta</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="fiscalCodeBusiness">Codice Fiscale (Azienda):</label>
+        <input
+          id="fiscalCodeBusiness"
+          type="text"
+          formControlName="fiscalCodeBusiness"
+        />
+        @if (clientForm.get('fiscalCodeBusiness')?.invalid && clientForm.get('fiscalCodeBusiness')?.touched) {
+          <div class="error-message">Codice Fiscale (Azienda) richiesto</div>
+        }
+      </div>
+
+      <div formGroupName="legalAddress" class="full-width">
+        <h4>Indirizzo Legale</h4>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="form-group">
+            <label for="streetLegal">Via:</label>
+            <input id="streetLegal" type="text" formControlName="street" />
+          </div>
+          <div class="form-group">
+            <label for="numberLegal">Numero:</label>
+            <input id="numberLegal" type="text" formControlName="number" />
+          </div>
+          <div class="form-group">
+            <label for="postalCodeLegal">CAP:</label>
+            <input id="postalCodeLegal" type="text" formControlName="postalCode" />
+          </div>
+          <div class="form-group">
+            <label for="cityLegal">Città:</label>
+            <input id="cityLegal" type="text" formControlName="city" />
+          </div>
+          <div class="form-group">
+            <label for="provinceLegal">Provincia:</label>
+            <input id="provinceLegal" type="text" formControlName="province" />
+          </div>
+          <div class="form-group">
+            <label for="countryLegal">Paese:</label>
+            <input id="countryLegal" type="text" formControlName="country" />
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="billingAddressBusiness" class="full-width">
+        <h4>Indirizzo di Fatturazione (Azienda)</h4>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="form-group">
+            <label for="streetBusiness">Via:</label>
+            <input id="streetBusiness" type="text" formControlName="street" />
+          </div>
+          <div class="form-group">
+            <label for="numberBusiness">Numero:</label>
+            <input id="numberBusiness" type="text" formControlName="number" />
+          </div>
+          <div class="form-group">
+            <label for="postalCodeBusiness">CAP:</label>
+            <input id="postalCodeBusiness" type="text" formControlName="postalCode" />
+          </div>
+          <div class="form-group">
+            <label for="cityBusiness">Città:</label>
+            <input id="cityBusiness" type="text" formControlName="city" />
+          </div>
+          <div class="form-group">
+            <label for="provinceBusiness">Provincia:</label>
+            <input id="provinceBusiness" type="text" formControlName="province" />
+          </div>
+          <div class="form-group">
+            <label for="countryBusiness">Paese:</label>
+            <input id="countryBusiness" type="text" formControlName="country" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Operational Addresses (TODO: implementare aggiunta/rimozione dinamica) -->
+      <div class="full-width">
+        <h4>Indirizzi Operativi</h4>
+        <!-- @for in futuro -->
+        <p>Saranno implementati in seguito.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="sdiCode">Codice SDI:</label>
+        <input id="sdiCode" type="text" formControlName="sdiCode" />
+      </div>
+
+      <div class="form-group">
+        <label for="pecEmail">PEC:</label>
+        <input id="pecEmail" type="email" formControlName="pecEmail" />
+        @if (clientForm.get('pecEmail')?.invalid && clientForm.get('pecEmail')?.touched) {
+          <div class="error-message">PEC non valida</div>
+        }
+      </div>
+    </div>
+  }
+
+  <app-button
+    [disabled]="!clientForm.valid"
+    text="Aggiungi Cliente"
+  ></app-button>
+</form>

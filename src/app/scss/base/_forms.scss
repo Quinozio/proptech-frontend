@@ -1,0 +1,49 @@
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--spacing-unit);
+  margin-bottom: var(--spacing-unit);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: var(--font-family-sans-serif);
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: var(--background-color);
+    cursor: not-allowed;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: calc(var(--spacing-unit) / 4);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-group {
+  margin-bottom: calc(var(--spacing-unit) * 1.5);
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: calc(var(--spacing-unit) / 2);
+}
+
+input[type="checkbox"] {
+  margin-right: calc(var(--spacing-unit) / 2);
+}

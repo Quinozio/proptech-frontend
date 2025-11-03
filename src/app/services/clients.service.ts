@@ -2,6 +2,7 @@ import { Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
+import { PrivateClient, BusinessClient } from '../models/client.model';
 
 export interface Customer {
   id: number;
@@ -31,11 +32,20 @@ export interface CustomerFilter {
 })
 export class ClientsService {
   private apiUrl = `${environment.apiUrl}/v1/customers`;
+  private privateClientUrl = `${environment.apiUrl}/v1/customers/individual`;
+  private businessClientUrl = `${environment.apiUrl}/v1/customers/business`;
 
   constructor(private http: HttpClient) {}
 
   getCustomers(filter: CustomerFilter): Observable<CustomerPage> {
-    // Implementazione della chiamata API con i parametri di filtro
     return this.http.get<CustomerPage>(this.apiUrl, { params: filter as any});
+  }
+
+  createPrivateClient(client: PrivateClient): Observable<PrivateClient> {
+    return this.http.post<PrivateClient>(this.privateClientUrl, client);
+  }
+
+  createBusinessClient(client: BusinessClient): Observable<BusinessClient> {
+    return this.http.post<BusinessClient>(this.businessClientUrl, client);
   }
 }
