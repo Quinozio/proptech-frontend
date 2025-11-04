@@ -1,9 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, combineLatest, from, of } from "rxjs";
-import { filter, map, tap, switchMap, catchError } from "rxjs/operators";
-import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
-import { authConfig } from "../app.config"; // Import the authConfig from app.config
+import { BehaviorSubject, Observable, combineLatest, of } from "rxjs";
+import { catchError, filter, map } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -14,7 +12,7 @@ export class AuthService {
   private _isDoneLoading$ = new BehaviorSubject<boolean>(false);
   private _authReady$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private oauthService: OAuthService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.checkUserStatus().subscribe();
   }
 
@@ -36,45 +34,27 @@ export class AuthService {
   private checkUserStatus(): Observable<boolean> {
     this._isDoneLoading$.next(false);
     this._authReady$.next(false);
-    return this.http
-      .get<any>(`${environment.apiUrl}/v1/me`, { withCredentials: true })
-      .pipe(
-        map(() => {
-          this.loggedIn.next(true);
-          this._isDoneLoading$.next(true);
-          this._authReady$.next(true);
-          return true;
-        }),
-        catchError((error) => {
-          console.error(
-            "AuthService - Errore durante la verifica dello stato utente:",
-            error
-          );
-          this.loggedIn.next(false);
-          this._isDoneLoading$.next(true);
-          this._authReady$.next(true);
-          return of(false);
-        })
-      );
-  }
-
-  login() {
-    // this.oauthService.initCodeFlow();
+    return this.http.get<any>(`${environment.apiUrl}/v1/me`).pipe(
+      map(() => {
+        this.loggedIn.next(true);
+        this._isDoneLoading$.next(true);
+        this._authReady$.next(true);
+        return true;
+      }),
+      catchError((error) => {
+        console.error(
+          "AuthService - Errore durante la verifica dello stato utente:",
+          error
+        );
+        this.loggedIn.next(false);
+        this._isDoneLoading$.next(true);
+        this._authReady$.next(true);
+        return of(false);
+      })
+    );
   }
 
   logout() {
-    this.oauthService.logOut();
     this.loggedIn.next(false);
-  }
-
-  hasValidAccessToken(): boolean {
-    return this.oauthService.hasValidAccessToken();
-  }
-  getAccessToken(): string {
-    return this.oauthService.getAccessToken();
-  }
-
-  getIdentityClaims(): any {
-    return this.oauthService.getIdentityClaims();
   }
 }
