@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddClient } from './add-client';
+import { AddClient } from '@proptech/components/clients/add-client/add-client';
 
 describe('AddClient', () => {
   let component: AddClient;

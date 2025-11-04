@@ -4,9 +4,9 @@ import {
   ViewChild,
   inject,
 } from "@angular/core";
-import { AuthService } from "../../services/auth.service";
-import { ButtonComponent } from "../ui/button/button.component";
-import { PopoverDirective } from "../ui/popover/popover.directive";
+import { AuthService } from "@proptech/services/auth.service";
+import { ButtonComponent } from "@proptech/components/ui/button/button.component";
+import { PopoverDirective } from "@proptech/components/ui/popover/popover.directive";
 
 @Component({
   selector: "app-header",

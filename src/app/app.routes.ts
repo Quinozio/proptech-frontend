@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { authGuard } from './guards/auth.guard';
-import { LayoutComponent } from './layout/layout.component';
-import { ClientsComponent } from './pages/clients/clients.component';
-import { UsersComponent } from './pages/users/users.component';
-import { Dashboard } from './pages/dashboard/dashboard';
-import { ArriviComponent } from './pages/lista/arrivi.component';
-import { ListaComponent } from './pages/lista/lista.component';
-import { PartenzeComponent } from './pages/lista/partenze.component';
-import { PrenotazioniComponent } from './pages/lista/prenotazioni.component';
+import { LoginComponent } from '@proptech/components/login/login.component';
+import { authGuard } from '@proptech/guards/auth.guard';
+import { LayoutComponent } from '@proptech/layout/layout.component';
+import { ClientsComponent } from '@proptech/pages/clients/clients.component';
+import { UsersComponent } from '@proptech/pages/users/users.component';
+import { Dashboard } from '@proptech/pages/dashboard/dashboard';
+import { ArriviComponent } from '@proptech/pages/lista/arrivi.component';
+import { ListaComponent } from '@proptech/pages/lista/lista.component';
+import { PartenzeComponent } from '@proptech/pages/lista/partenze.component';
+import { PrenotazioniComponent } from '@proptech/pages/lista/prenotazioni.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },

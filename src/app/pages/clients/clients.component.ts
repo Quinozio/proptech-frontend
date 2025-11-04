@@ -1,15 +1,15 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
-import { ClientFiltersComponent } from "../../components/clients/client-filters/client-filters.component";
+import { ClientFiltersComponent } from "@proptech/components/clients/client-filters/client-filters.component";
 import {
   ClientsService,
   Customer,
   CustomerFilter,
   CustomerPage,
 } from "../../services/clients.service";
-import { DialogService } from "../../services/dialog.service";
-import { AddClient } from "../../components/clients/add-client/add-client";
-import { Column, TableComponent } from "../../components/ui/table/table.component";
-import { ButtonComponent } from "../../components/ui/button/button.component";
+import { DialogService } from "@proptech/services/dialog.service";
+import { AddClient } from "@proptech/components/clients/add-client/add-client";
+import { Column, TableComponent } from "@proptech/components/ui/table/table.component";
+import { ButtonComponent } from "@proptech/components/ui/button/button.component";
 
 @Component({
   selector: "app-clients",

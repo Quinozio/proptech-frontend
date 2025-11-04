@@ -1,6 +1,6 @@
 import { NgClass } from "@angular/common";
 import { Component } from "@angular/core";
-import { ToastService } from "../../../services/toast.service";
+import { ToastService } from "@proptech/services/toast.service";
 
 @Component({
   selector: "app-toast-container",

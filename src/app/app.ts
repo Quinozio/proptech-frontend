@@ -1,9 +1,9 @@
 import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DialogComponent } from './components/ui/dialog/dialog.component';
-import { DialogService } from './services/dialog.service';
+import { DialogComponent } from '@proptech/components/ui/dialog/dialog.component';
+import { DialogService } from '@proptech/services/dialog.service';
 import { NgComponentOutlet } from '@angular/common';
-import { ToastContainerComponent } from './components/ui/toast-container/toast-container.component';
+import { ToastContainerComponent } from '@proptech/components/ui/toast-container/toast-container.component';
 
 @Component({
   selector: 'app-root',

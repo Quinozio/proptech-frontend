@@ -1,8 +1,8 @@
 import { Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { environment } from "../../environments/environment";
-import { PrivateClient, BusinessClient } from '../models/client.model';
+import { environment } from "@environments/environment";
+import { PrivateClient, BusinessClient } from '@proptech/models/client.model';
 
 export interface Customer {
   id: number;

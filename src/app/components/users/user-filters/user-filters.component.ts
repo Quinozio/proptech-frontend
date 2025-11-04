@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../ui/button/button.component';
+import { ButtonComponent } from '@proptech/components/ui/button/button.component';
 
 @Component({
   selector: 'app-user-filters',

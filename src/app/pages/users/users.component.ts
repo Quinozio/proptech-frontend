@@ -1,15 +1,15 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
-import { UserFiltersComponent } from "../../components/users/user-filters/user-filters.component";
+import { UserFiltersComponent } from "@proptech/components/users/user-filters/user-filters.component";
 import {
   UsersService,
   User,
   UserFilter,
   UserPage,
 } from "../../services/users.service";
-import { DialogService } from "../../services/dialog.service";
-import { AddUser } from "../../components/users/add-user/add-user";
-import { Column, TableComponent } from "../../components/ui/table/table.component";
-import { ButtonComponent } from "../../components/ui/button/button.component";
+import { DialogService } from "@proptech/services/dialog.service";
+import { AddUser } from "@proptech/components/users/add-user/add-user";
+import { Column, TableComponent } from "@proptech/components/ui/table/table.component";
+import { ButtonComponent } from "@proptech/components/ui/button/button.component";
 
 @Component({
   selector: "app-users",

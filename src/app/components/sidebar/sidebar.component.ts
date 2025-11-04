@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
-import { SidebarMenuComponent } from "../ui/sidebar-menu/sidebar-menu.component";
+import { SidebarMenuComponent } from "@proptech/components/ui/sidebar-menu/sidebar-menu.component";
 import { Router } from "@angular/router"; // Import Router
 import { Component } from "@angular/core";
 

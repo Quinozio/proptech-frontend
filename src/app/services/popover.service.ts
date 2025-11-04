@@ -1,6 +1,6 @@
 import { inject, TemplateRef, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { PopoverContainerComponent } from '../components/ui/popover/popover-container.component';
+import { PopoverContainerComponent } from '@proptech/components/ui/popover/popover-container.component';
 
 type PopoverPosition = 'top' | 'right' | 'bottom' | 'left' | 'auto';
 

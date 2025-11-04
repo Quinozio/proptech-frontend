@@ -7,9 +7,9 @@ import {
   FormControl,
 } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { ButtonComponent } from "../../ui/button/button.component";
-import { ClientsService } from "../../../services/clients.service";
-import { BusinessClient, PrivateClient } from "../../../models/client.model";
+import { ButtonComponent } from "@proptech/components/ui/button/button.component";
+import { ClientsService } from "@proptech/services/clients.service";
+import { BusinessClient, PrivateClient } from "@proptech/models/client.model";
 
 @Component({
   selector: "app-add-client",

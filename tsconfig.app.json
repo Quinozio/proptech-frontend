@@ -4,7 +4,16 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "baseUrl": "./",
+    "paths": {
+      "@proptech/*": [
+        "src/app/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"

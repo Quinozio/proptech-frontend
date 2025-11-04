@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TableComponent } from '../../components/ui/table/table.component';
-import { ButtonComponent } from '../../components/ui/button/button.component';
+import { TableComponent } from '@proptech/components/ui/table/table.component';
+import { ButtonComponent } from '@proptech/components/ui/button/button.component';
  
 @Component({
   selector: 'app-prenotazioni',

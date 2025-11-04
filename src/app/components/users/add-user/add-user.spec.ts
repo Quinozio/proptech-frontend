@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUser } from './add-user';
+import { AddUser } from '@proptech/components/users/add-user/add-user';
 
 describe('AddUser', () => {
   let component: AddUser;

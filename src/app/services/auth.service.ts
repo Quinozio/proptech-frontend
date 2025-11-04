@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, combineLatest, of } from "rxjs";
 import { catchError, filter, map } from "rxjs/operators";
-import { environment } from "../../environments/environment";
+import { environment } from "@environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -59,18 +59,6 @@ export class AuthService {
   }
 
   logout() {
-    this.http
-      .post(`${environment.apiUrl}/logout`, {})
-      .pipe(
-        catchError((error) => {
-          console.error("Errore durante la richiesta di logout locale:", error);
-          return of(null); // Continua il flusso anche in caso di errore
-        }),
-        map(() => {
-          // this.login();
-          // this.loggedIn.next(false);
-        })
-      )
-      .subscribe();
+    window.location.href = `${environment.apiUrl}/logout`;
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { SubMenuComponent } from '../../components/submenu/sub-menu.component';
+import { SubMenuComponent } from '@proptech/components/submenu/sub-menu.component';
 
 @Component({
   selector: 'app-lista',

@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ToastService } from '../services/toast.service';
+import { ToastService } from '@proptech/services/toast.service';
 
 export const errorInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,

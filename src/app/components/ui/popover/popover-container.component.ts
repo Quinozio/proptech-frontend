@@ -15,7 +15,7 @@ import {
   Signal,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { PopoverService } from "../../../../app/services/popover.service";
+import { PopoverService } from "@proptech/services/popover.service";
 
 type PopoverPosition = "top" | "right" | "bottom" | "left" | "auto";
 type PopoverAppendTo = "body" | undefined;
