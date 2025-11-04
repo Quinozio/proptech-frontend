@@ -1,1 +1,62 @@
-<p>add-user works!</p>
+<form
+  [formGroup]="userForm"
+  (ngSubmit)="onSubmit()"
+  id="addUserForm"
+  class="form-container"
+>
+  <div class="form-content">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input id="username" type="text" formControlName="username" />
+        @if (userForm.get('username')?.invalid && userForm.get('username')?.touched) {
+        <div class="error-message">Username is required</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" />
+        @if (userForm.get('email')?.invalid && userForm.get('email')?.touched) {
+        <div class="error-message">A valid email is required</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input id="password" type="password" formControlName="password" />
+        @if (userForm.get('password')?.invalid && userForm.get('password')?.touched) {
+        <div class="error-message">Password is required</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="roles">Roles:</label>
+        <select id="roles" formControlName="roles" multiple>
+          @for (role of roles(); track role.id) {
+          <option [value]="role.name">{{ role.name }}</option>
+          }
+        </select>
+        @if (userForm.get('roles')?.invalid && userForm.get('roles')?.touched) {
+        <div class="error-message">At least one role is required</div>
+        }
+      </div>
+    </div>
+  </div>
+</form>
+
+<ng-template appDialogFooter>
+  <div class="form-footer">
+    <app-button
+      (click)="close()"
+      variant="secondary"
+      text="Cancel"
+    ></app-button>
+    <app-button
+      type="submit"
+      form="addUserForm"
+      variant="primary"
+      text="Add User"
+    ></app-button>
+  </div>
+</ng-template>

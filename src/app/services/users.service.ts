@@ -39,16 +39,32 @@ export interface UserFilter {
   // sort: string[];
 }
 
+export interface CreateUser {
+  username: string;
+  email: string;
+  password?: string;
+  roles: string[];
+}
+
 @Injectable({
   providedIn: "root",
 })
 export class UsersService {
-  private apiUrl = `${environment.apiUrl}/api/v1/users`;
+  private apiUrl = `/api/v1/users`;
+  private apiRolesUrl = `/api/v1/roles`;
 
   constructor(private http: HttpClient) {}
 
   getUsers(filter: UserFilter): Observable<UserPage> {
     // Implementazione della chiamata API con i parametri di filtro
-    return this.http.get<UserPage>(this.apiUrl, { params: filter as any});
+    return this.http.get<UserPage>(this.apiUrl, { params: filter as any });
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(this.apiRolesUrl);
+  }
+
+  createUser(user: CreateUser): Observable<User> {
+    return this.http.post<User>(this.apiUrl, user);
   }
 }

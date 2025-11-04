@@ -34,7 +34,7 @@ export class AuthService {
   private checkUserStatus(): Observable<boolean> {
     this._isDoneLoading$.next(false);
     this._authReady$.next(false);
-    return this.http.get<any>(`${environment.apiUrl}/api/v1/me`).pipe(
+    return this.http.get<any>(`/api/v1/me`).pipe(
       map(() => {
         this.loggedIn.next(true);
         this._isDoneLoading$.next(true);
