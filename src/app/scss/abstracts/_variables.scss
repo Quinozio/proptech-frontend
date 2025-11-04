@@ -18,4 +18,13 @@ $spacing-unit: 8px;
   --background-color: #{$background-color};
   --font-family-sans-serif: #{$font-family-sans-serif};
   --spacing-unit: #{$spacing-unit};
+
+  --border-radius-md: 8px;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --color-on-primary: #ffffff;
+  --font-weight-medium: 500;
+  --color-success: #28a745;
+  --color-error: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
 }

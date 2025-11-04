@@ -2,10 +2,10 @@ import { CanActivateFn, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { inject } from "@angular/core";
 import { map, switchMap, take, filter, catchError, of } from "rxjs";
+import { environment } from "../../environments/environment";
 
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
-  const router = inject(Router);
 
   return authService.isDoneLoading$.pipe(
     filter((isDoneLoading) => isDoneLoading),
@@ -25,7 +25,8 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (isLoggedIn) {
         return true;
       } else {
-        return router.createUrlTree(["/login"]);
+        authService.logout();
+        return false;
       }
     }),
     catchError((error) => {
@@ -33,7 +34,8 @@ export const authGuard: CanActivateFn = (route, state) => {
         "AuthGuard - Errore critico durante il caricamento o la verifica dell'autenticazione:",
         error
       );
-      return of(router.createUrlTree(["/login"]));
+      authService.logout();
+      return of(false);
     })
   );
 };

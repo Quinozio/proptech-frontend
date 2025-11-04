@@ -34,7 +34,7 @@ export class AuthService {
   private checkUserStatus(): Observable<boolean> {
     this._isDoneLoading$.next(false);
     this._authReady$.next(false);
-    return this.http.get<any>(`${environment.apiUrl}/v1/me`).pipe(
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/me`).pipe(
       map(() => {
         this.loggedIn.next(true);
         this._isDoneLoading$.next(true);
@@ -54,7 +54,23 @@ export class AuthService {
     );
   }
 
+  login() {
+    window.location.href = `${environment.authUrl}/authorization/proptech-bff`;
+  }
+
   logout() {
-    this.loggedIn.next(false);
+    this.http
+      .post(`${environment.apiUrl}/logout`, {})
+      .pipe(
+        catchError((error) => {
+          console.error("Errore durante la richiesta di logout locale:", error);
+          return of(null); // Continua il flusso anche in caso di errore
+        }),
+        map(() => {
+          // this.login();
+          // this.loggedIn.next(false);
+        })
+      )
+      .subscribe();
   }
 }
