@@ -13,10 +13,5 @@ import { ButtonComponent } from '../ui/button/button.component';
 })
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) { }
-
-  login() {
-    console.log("Login button clicked");
-    this.authService.login();
-  }
 }
  

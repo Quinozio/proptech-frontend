@@ -1,40 +1,22 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { AuthConfig, provideOAuthClient } from 'angular-oauth2-oidc';
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from "@angular/core";
+import { provideRouter } from "@angular/router";
 
-import { routes } from './app.routes';
-import { authInterceptor } from './interceptors/auth.interceptor';
-import { unauthorizedInterceptor } from './interceptors/unauthorized.interceptor';
-
-const apiScopes = [
-  'user:read', 'user:create', 'user:update', 'user:delete',
-  'role:read', 'role:create', 'role:update', 'role:delete',
-  'permission:read',
-  'customer:read', 'customer:create', 'customer:update', 'customer:delete',
-  'admin:access'
-];
-
-const allScopes = ['openid', 'offline_access', ...apiScopes].join(' ');
-
-export const authConfig: AuthConfig = {
-  issuer: 'http://localhost:9000',
-  redirectUri: 'http://localhost:4200/dashboard',
-  clientId: 'angular-spa-client',
-  scope: allScopes,
-  responseType: 'code',
-  disableAtHashCheck: true,
-  showDebugInformation: true,
-  postLogoutRedirectUri: 'http://localhost:4200/login',
-  disablePKCE: false,
-};
+import { routes } from "./app.routes";
+import { authInterceptor } from "./interceptors/auth.interceptor";
+import { unauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor, unauthorizedInterceptor])),
-    provideOAuthClient()
-  ]
+    provideHttpClient(
+      withInterceptors([authInterceptor, unauthorizedInterceptor])
+    ),
+  ],
 };
