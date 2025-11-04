@@ -1,8 +1,10 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, combineLatest, from, of } from "rxjs";
 import { filter, map, tap, switchMap, catchError } from "rxjs/operators";
 import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
 import { authConfig } from "../app.config"; // Import the authConfig from app.config
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -12,33 +14,8 @@ export class AuthService {
   private _isDoneLoading$ = new BehaviorSubject<boolean>(false);
   private _authReady$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private oauthService: OAuthService) {
-    // this.oauthService.configure(authConfig);
-
-    // from(this.oauthService.loadDiscoveryDocumentAndTryLogin()).pipe(
-    //   tap(() => this._isDoneLoading$.next(true)),
-    //   tap(() => this.loggedIn.next(this.oauthService.hasValidAccessToken())),
-    //   tap(() => this._authReady$.next(true)),
-    //   catchError(error => {
-    //     console.error("AuthService - Errore nel caricamento del discovery document o nel login:", error);
-    //     this._isDoneLoading$.next(true); // Sblocca la guardia anche in caso di errore
-    //     this.loggedIn.next(false); // Imposta lo stato a non loggato
-    //     this._authReady$.next(true);
-    //     return of(false); // Ritorna un observable che emette false per completare il flusso
-    //   })
-    // ).subscribe();
-
-    // // Automatically renew token
-    // this.oauthService.setupAutomaticSilentRefresh();
-
-    // this.oauthService.events.subscribe(event => {
-    //   if (event.type === 'token_received' || event.type === 'token_refreshed') {
-    //     this.loggedIn.next(this.oauthService.hasValidAccessToken());
-    //   }
-    //   if (event.type === 'session_terminated' || event.type === 'logout') {
-    //     this.loggedIn.next(false);
-    //   }
-    // });
+  constructor(private oauthService: OAuthService, private http: HttpClient) {
+    this.checkUserStatus().subscribe();
   }
 
   get isDoneLoading$(): Observable<boolean> {
@@ -50,11 +27,35 @@ export class AuthService {
   }
 
   get isLoggedIn(): Observable<boolean> {
-    return of(true);
-    // return combineLatest([this.authReady$, this.loggedIn]).pipe(
-    //   filter(([authReady]) => authReady),
-    //   map(([, isLoggedIn]) => isLoggedIn),
-    // );
+    return combineLatest([this.authReady$, this.loggedIn]).pipe(
+      filter(([authReady]) => authReady),
+      map(([, isLoggedIn]) => isLoggedIn)
+    );
+  }
+
+  private checkUserStatus(): Observable<boolean> {
+    this._isDoneLoading$.next(false);
+    this._authReady$.next(false);
+    return this.http
+      .get<any>(`${environment.apiUrl}/v1/me`, { withCredentials: true })
+      .pipe(
+        map(() => {
+          this.loggedIn.next(true);
+          this._isDoneLoading$.next(true);
+          this._authReady$.next(true);
+          return true;
+        }),
+        catchError((error) => {
+          console.error(
+            "AuthService - Errore durante la verifica dello stato utente:",
+            error
+          );
+          this.loggedIn.next(false);
+          this._isDoneLoading$.next(true);
+          this._authReady$.next(true);
+          return of(false);
+        })
+      );
   }
 
   login() {

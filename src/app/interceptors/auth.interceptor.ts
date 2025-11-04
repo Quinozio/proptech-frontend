@@ -1,19 +1,18 @@
-import { HttpInterceptorFn } from "@angular/common/http";
-import { inject } from "@angular/core";
-import { OAuthService } from "angular-oauth2-oidc";
+import { HttpErrorResponse, HttpInterceptorFn } from "@angular/common/http";
+import { catchError, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const oauthService = inject(OAuthService);
-  const accessToken = oauthService.getAccessToken();
-  const isApiUrl = req.url.startsWith(environment.apiUrl);
 
-  if (accessToken && isApiUrl) {
-    const cloned = req.clone({
-      headers: req.headers.set("Authorization", `Bearer ${accessToken}`),
-    });
-    return next(cloned);
-  }
-
-  return next(req);
+  const cloned = req.clone({
+    withCredentials: true,
+  });
+  return next(cloned).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        window.location.href = `${environment.authUrl}/authorization/proptech-bff`;
+      }
+      return throwError(() => error);
+    })
+  );
 };
