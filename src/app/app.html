@@ -6,8 +6,8 @@
   [closeOnBackdropClick]="dialogService.closeOnBackdropClick()"
   (closed)="closeDialog()"
 >
-  @if (dialogContentComponent()) {
-    <ng-container [ngComponentOutlet]="dialogContentComponent()"></ng-container>
+  @if (dialogContentComponent(); as component) {
+    <ng-container [ngComponentOutlet]="component"></ng-container>
   }
 </app-dialog>
 

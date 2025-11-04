@@ -8,4 +8,9 @@
   <div class="dialog-content">
     <ng-content></ng-content>
   </div>
+  @if (footerTemplate()) {
+    <div class="dialog-footer">
+      <ng-container [ngTemplateOutlet]="footerTemplate()!"></ng-container>
+    </div>
+  }
 </div>

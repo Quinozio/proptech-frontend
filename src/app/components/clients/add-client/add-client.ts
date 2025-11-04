@@ -7,80 +7,93 @@ import {
   FormControl,
 } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { ButtonComponent } from "@proptech/components/ui/button/button.component";
 import { ClientsService } from "@proptech/services/clients.service";
 import { BusinessClient, PrivateClient } from "@proptech/models/client.model";
+import { DialogService } from "@proptech/services/dialog.service";
+import { DialogFooterDirective } from "@proptech/components/ui/dialog/dialog-footer.directive";
+import { ButtonComponent } from "@proptech/components/ui/button/button.component";
+import { AddressFormComponent } from "../address-form/address-form.component";
 
 @Component({
   selector: "app-add-client",
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent],
   templateUrl: "./add-client.html",
   styleUrl: "./add-client.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: "add-client-container",
   },
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DialogFooterDirective,
+    ButtonComponent,
+    AddressFormComponent,
+  ],
 })
 export class AddClient {
   private fb = inject(FormBuilder);
   private clientsService = inject(ClientsService);
+  private dialogService = inject(DialogService);
 
-  isBusinessClient = new FormControl(false); // Toggle per il tipo di cliente
+  isBusinessClient = new FormControl(false);
 
   clientForm: FormGroup;
 
   constructor() {
     this.clientForm = this.fb.group({
       isBusiness: this.isBusinessClient,
-      email: ['test.privato@example.com', [Validators.required, Validators.email]],
-      phoneNumber: ['1234567890', Validators.required],
+      email: [
+        "test.privato@example.com",
+        [Validators.required, Validators.email],
+      ],
+      phoneNumber: ["1234567890", Validators.required],
       // Campi per cliente privato
-      firstName: ['Mario'],
-      lastName: ['Rossi'],
-      fiscalCodePrivate: ['RSSMRA80A01H501U'],
-      birthDate: ['1980-01-01'],
-      birthPlace: ['Roma'],
-      nationality: ['Italiana'],
+      firstName: ["Mario"],
+      lastName: ["Rossi"],
+      fiscalCodePrivate: ["RSSMRA80A01H501U"],
+      birthDate: ["1980-01-01"],
+      birthPlace: ["Roma"],
+      nationality: ["Italiana"],
       billingAddressPrivate: this.fb.group({
-        street: ['Via Roma'],
-        number: ['10'],
-        postalCode: ['00100'],
-        city: ['Roma'],
-        province: ['RM'],
-        country: ['IT']
+        street: ["Via Roma"],
+        number: ["10"],
+        postalCode: ["00100"],
+        city: ["Roma"],
+        province: ["RM"],
+        country: ["IT"],
       }),
       // Campi per cliente aziendale
-      companyName: [''],
-      vatNumber: [''],
-      fiscalCodeBusiness: [''],
+      companyName: [""],
+      vatNumber: [""],
+      fiscalCodeBusiness: [""],
       legalAddress: this.fb.group({
-        street: [''],
-        number: [''],
-        postalCode: [''],
-        city: [''],
-        province: [''],
-        country: ['']
+        street: ["Via Roma"],
+        number: ["10"],
+        postalCode: ["00100"],
+        city: ["Roma"],
+        province: ["RM"],
+        country: ["IT"],
       }),
       billingAddressBusiness: this.fb.group({
-        street: [''],
-        number: [''],
-        postalCode: [''],
-        city: [''],
-        province: [''],
-        country: ['']
+        street: ["Via Roma"],
+        number: ["10"],
+        postalCode: ["00100"],
+        city: ["Roma"],
+        province: ["RM"],
+        country: ["IT"],
       }),
-      operationalAddresses: this.fb.array([]),
-      sdiCode: [''],
-      pecEmail: ['', Validators.email]
     });
 
-    this.isBusinessClient.valueChanges.subscribe(isBusiness => {
+    this.isBusinessClient.valueChanges.subscribe((isBusiness) => {
       this.toggleClientType(isBusiness);
     });
 
     // Imposta il tipo di cliente di default come privato
     this.toggleClientType(false);
+  }
+
+  close(): void {
+    this.dialogService.close();
   }
 
   toggleClientType(isBusiness: boolean | null): void {

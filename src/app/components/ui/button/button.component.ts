@@ -19,7 +19,8 @@ export class ButtonComponent {
   variant = input<'primary' | 'secondary'>('primary');
   iconOnly = input<boolean>(false);
   disabled = input<boolean>(false);
-
+  form = input<string | undefined>(undefined);
+  type = input<string>('button');
   isMaterialIcon = computed(() => this.icon() && !this.icon()?.includes('/'));
 
   // Outputs

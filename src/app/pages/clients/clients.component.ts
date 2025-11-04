@@ -68,7 +68,7 @@ export class ClientsComponent implements OnInit {
   }
 
   openAddClient() {
-    this.dialogService.open(AddClient);
+    this.dialogService.open(AddClient, { title: 'Crea cliente' });
   }
 
   clientColumnDefinitions: Column[] = [

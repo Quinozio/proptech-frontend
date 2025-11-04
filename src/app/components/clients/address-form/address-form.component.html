@@ -1,0 +1,33 @@
+<div [formGroupName]="formGroupName()" class="full-width">
+  <h4>{{ title() }}</h4>
+  <div class="grid grid-cols-3 gap-4">
+    <div class="form-group">
+      <label [for]="idPrefix() + 'Street'">Via:</label>
+      <input [id]="idPrefix() + 'Street'" type="text" formControlName="street" />
+    </div>
+    <div class="form-group">
+      <label [for]="idPrefix() + 'Number'">Numero:</label>
+      <input [id]="idPrefix() + 'Number'" type="text" formControlName="number" />
+    </div>
+    <div class="form-group">
+      <label [for]="idPrefix() + 'PostalCode'">CAP:</label>
+      <input
+        [id]="idPrefix() + 'PostalCode'"
+        type="text"
+        formControlName="postalCode"
+      />
+    </div>
+    <div class="form-group">
+      <label [for]="idPrefix() + 'City'">Città:</label>
+      <input [id]="idPrefix() + 'City'" type="text" formControlName="city" />
+    </div>
+    <div class="form-group">
+      <label [for]="idPrefix() + 'Province'">Provincia:</label>
+      <input [id]="idPrefix() + 'Province'" type="text" formControlName="province" />
+    </div>
+    <div class="form-group">
+      <label [for]="idPrefix() + 'Country'">Paese:</label>
+      <input [id]="idPrefix() + 'Country'" type="text" formControlName="country" />
+    </div>
+  </div>
+</div>

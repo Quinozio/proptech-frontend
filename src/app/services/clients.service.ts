@@ -31,9 +31,9 @@ export interface CustomerFilter {
   providedIn: "root",
 })
 export class ClientsService {
-  private apiUrl = `${environment.apiUrl}/api/v1/customers`;
-  private privateClientUrl = `${environment.apiUrl}/api/v1/customers/individual`;
-  private businessClientUrl = `${environment.apiUrl}/api/v1/customers/business`;
+  private apiUrl = `/api/v1/customers`;
+  private privateClientUrl = `/api/v1/customers/individual`;
+  private businessClientUrl = `/api/v1/customers/business`;
 
   constructor(private http: HttpClient) {}
 

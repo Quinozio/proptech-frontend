@@ -93,3 +93,9 @@
   padding: 24px;
   overflow-y: auto;
 }
+
+.dialog-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  flex-shrink: 0;
+}

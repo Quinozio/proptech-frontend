@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AddClient } from "./add-client";
 
-import { AddClient } from '@proptech/components/clients/add-client/add-client';
-
-describe('AddClient', () => {
+describe("AddClient", () => {
   let component: AddClient;
   let fixture: ComponentFixture<AddClient>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddClient]
-    })
-    .compileComponents();
+      imports: [AddClient],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddClient);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
