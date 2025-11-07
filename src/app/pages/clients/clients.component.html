@@ -2,21 +2,28 @@
   <div class="secondary-nav">
     <h1>Clienti</h1>
 
-    <app-button icon="add" text="Aggiungi cliente" (clickEvent)="openAddClient()" variant="primary"></app-button>
+    <app-button
+      icon="add"
+      text="Aggiungi cliente"
+      (clickEvent)="openAddClient()"
+      variant="primary"
+    ></app-button>
   </div>
   <!-- I filtri andranno qui -->
   <div class="filters-section">
     <app-client-filters></app-client-filters>
   </div>
 
-  <!-- La tabella andrà qui -->
   <div class="table-section">
-    <app-table [data]="clients()" [columns]="clientColumnDefinitions"></app-table>
-  </div>
-
-  <div class="pagination-controls">
-    <span>{{ totalElements() }} risultati</span>
-    <app-button text="Precedente" (clickEvent)="onPreviousPage()" [disabled]="currentPage() === 0" variant="secondary"></app-button>
-    <app-button text="Successiva" (clickEvent)="onNextPage()" [disabled]="currentPage() >= totalPages() - 1" variant="secondary"></app-button>
+    <app-table
+      [data]="clients()"
+      [columns]="clientColumnDefinitions"
+      [currentPage]="currentPage()"
+      [itemsPerPage]="pageSize()"
+      [paginated]="true"
+      [totalResults]="totalElements()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    ></app-table>
   </div>
 </div>

@@ -25,7 +25,6 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (isLoggedIn) {
         return true;
       } else {
-        authService.logout();
         return false;
       }
     }),
@@ -34,7 +33,6 @@ export const authGuard: CanActivateFn = (route, state) => {
         "AuthGuard - Errore critico durante il caricamento o la verifica dell'autenticazione:",
         error
       );
-      authService.logout();
       return of(false);
     })
   );

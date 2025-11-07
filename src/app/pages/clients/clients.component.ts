@@ -60,10 +60,8 @@ export class ClientsComponent implements OnInit {
     this.loadClients();
   }
 
-  onNextPage(): void {
-    this.currentPage.update((page) =>
-      Math.min(this.totalPages() - 1, page + 1)
-    );
+  onPageChange(newPage: number): void {
+    this.currentPage.set(newPage);
     this.loadClients();
   }
 

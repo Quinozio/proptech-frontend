@@ -23,19 +23,15 @@ export class TableComponent {
   totalResults = input(0);
   currentPage = input(1);
   itemsPerPage = input(10);
+  totalPages = input(1);
 
   pageChange = output<number>();
   selectionChange = output<any[]>();
 
   selectedRows: any[] = [];
 
-  get totalPages(): number {
-    return Math.ceil(this.totalResults() / this.itemsPerPage());
-  }
-
   onPageChange(page: number): void {
-    if (page > 0 && page <= this.totalPages) {
-      // this.currentPage = page; // currentPage è ora un input signal, non può essere modificato direttamente
+    if (page > 0 && page <= this.totalPages()) {
       this.pageChange.emit(page);
     }
   }

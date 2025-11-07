@@ -42,11 +42,11 @@
         [disabled]="currentPage() === 1"
         variant="secondary"
       ></app-button>
-      <span>Pagina {{ currentPage() }} di {{ totalPages }}</span>
+      <span>Pagina {{ currentPage() }} di {{ totalPages() }}</span>
       <app-button
         text="Successiva"
         (clickEvent)="onPageChange(currentPage() + 1)"
-        [disabled]="currentPage() === totalPages"
+        [disabled]="currentPage() === totalPages()"
         variant="secondary"
       ></app-button>
     </div>
