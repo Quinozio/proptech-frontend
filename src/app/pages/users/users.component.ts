@@ -1,22 +1,17 @@
-import { Component, inject, OnInit, signal } from "@angular/core";
-import { UserFiltersComponent } from "@proptech/components/users/user-filters/user-filters.component";
-import {
-  UsersService,
-  User,
-  UserFilter,
-  UserPage,
-} from "../../services/users.service";
-import { DialogService } from "@proptech/services/dialog.service";
-import { AddUser } from "@proptech/components/users/add-user/add-user";
-import { Column, TableComponent } from "@proptech/components/ui/table/table.component";
-import { ButtonComponent } from "@proptech/components/ui/button/button.component";
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { UserFiltersComponent } from '@proptech/components/users/user-filters/user-filters.component';
+import { UsersService, User, UserFilter, UserPage } from '../../services/users.service';
+import { DialogService } from '@proptech/services/dialog.service';
+import { AddUser } from '@proptech/components/users/add-user/add-user';
+import { Column, TableComponent } from '@proptech/components/ui/table/table.component';
+import { ButtonComponent } from '@proptech/components/ui/button/button.component';
 
 @Component({
-  selector: "app-users",
+  selector: 'app-users',
   standalone: true,
   imports: [UserFiltersComponent, TableComponent, ButtonComponent],
-  templateUrl: "./users.component.html",
-  styleUrl: "./users.component.scss",
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.scss',
 })
 export class UsersComponent implements OnInit {
   users = signal<User[]>([]);
@@ -50,7 +45,7 @@ export class UsersComponent implements OnInit {
         this.totalPages.set(data.page.totalPages);
       },
       error: (err) => {
-        console.error("Error loading users", err);
+        console.error('Error loading users', err);
       },
     });
   }
@@ -61,9 +56,7 @@ export class UsersComponent implements OnInit {
   }
 
   onNextPage(): void {
-    this.currentPage.update((page) =>
-      Math.min(this.totalPages() - 1, page + 1)
-    );
+    this.currentPage.update((page) => Math.min(this.totalPages() - 1, page + 1));
     this.loadUsers();
   }
 
@@ -71,9 +64,13 @@ export class UsersComponent implements OnInit {
     this.dialogService.open(AddUser);
   }
 
-  userColumnDefinitions: Column[] = [
-    { field: "username", header: "Username" },
-    { field: "email", header: "Email" },
-    { field: "roles", header: "Ruoli", formatter: (data: any) => data.roles.map((role: any) => role.name).join(', ') },
+  userColumnDefinitions: Column<User>[] = [
+    { field: 'username', header: 'Username' },
+    { field: 'email', header: 'Email' },
+    {
+      field: 'roles',
+      header: 'Ruoli',
+      formatter: (data: any) => data.roles.map((role: any) => role.name).join(', '),
+    },
   ];
 }

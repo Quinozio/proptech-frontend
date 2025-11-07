@@ -1,14 +1,19 @@
 <button
   [attr.aria-label]="icon() ? text() || icon() : null"
-  [disabled]="disabled()"
+  [disabled]="disabled() || isLoading()"
   [attr.type]="type()"
   [attr.form]="form()"
 >
-  @if (icon()) { @if (isMaterialIcon()) {
-  <i class="material-symbols-outlined">{{ icon() }}</i>
-  } @else {
-  <img [src]="icon()" alt="" width="16" height="16" />
-  } } @if (text()) {
-  <span>{{ text() }}</span>
+  @if (isLoading()) {
+    <app-spinner></app-spinner>
+  } @else if (icon()) {
+    @if (isMaterialIcon()) {
+      <i class="material-symbols-outlined">{{ icon() }}</i>
+    } @else {
+      <img [src]="icon()" alt="" width="16" height="16" />
+    }
+  }
+  @if (text()) {
+    <span>{{ text() }}</span>
   }
 </button>

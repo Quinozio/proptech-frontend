@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-api:user-service": "openapi-generator-cli generate -i http://localhost:8081/v3/api-docs/user-service -g typescript-fetch -o src/api/user-service --additional-properties modelOnly=true",
+    "generate-api:customer-service": "openapi-generator-cli generate -i http://localhost:8081/v3/api-docs/customer-service -g typescript-fetch -o src/api/customer-service --additional-properties modelOnly=true",
+    "generate-api": "npm run generate-api:user-service && npm run generate-api:customer-service" 
   },
   "prettier": {
     "printWidth": 100,

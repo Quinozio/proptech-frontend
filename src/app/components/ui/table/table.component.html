@@ -4,28 +4,51 @@
       <thead>
         <tr>
           @if (selectable()) {
-          <th class="checkbox-header"></th>
+          <th class="checkbox-header">
+            <input
+              type="checkbox"
+              [checked]="allRowsSelected()"
+              [indeterminate]="someRowsSelected()"
+              (click)="toggleAllRowsSelection()"
+            />
+          </th>
           } @for (column of columns(); track column.field) {
-          <th>{{ column.header }}</th>
+          <th>
+            @if (column.headerTemplate) {
+            <ng-container [ngTemplateOutlet]="column.headerTemplate"></ng-container>
+            } @else {
+            {{ column.header }}
+            }
+          </th>
           }
         </tr>
       </thead>
       <tbody>
         @for (row of data(); track row.id) {
         <tr
-          (click)="toggleRowSelection(row)"
           [class.selected]="selectable() && isRowSelected(row)"
+          [class.link]="!!rowLink()"
+          (click)="onRowClick(row)"
         >
           @if (selectable()) {
           <td class="checkbox-cell">
             <input
               type="checkbox"
               [checked]="isRowSelected(row)"
-              (click)="$event.stopPropagation()"
+              (click)="$event.stopPropagation(); toggleRowSelection(row)"
             />
           </td>
           } @for (column of columns(); track column.field) {
-          <td>{{ column.formatter ? column.formatter(row) : row[column.field] }}</td>
+          <td>
+            @if (column.cellTemplate) {
+            <ng-container
+              [ngTemplateOutlet]="column.cellTemplate"
+              [ngTemplateOutletContext]="{ $implicit: row, column: column }"
+            ></ng-container>
+            } @else {
+            {{ column.formatter ? column.formatter(row) : row[column.field] }}
+            }
+          </td>
           }
         </tr>
         }

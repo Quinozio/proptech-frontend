@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -35,6 +35,7 @@ export class AddClient {
   private clientsService = inject(ClientsService);
   private dialogService = inject(DialogService);
 
+  isLoading = signal(false);
   isBusinessClient = new FormControl(false);
 
   clientForm: FormGroup;
@@ -82,6 +83,9 @@ export class AddClient {
         province: ["RM"],
         country: ["IT"],
       }),
+      operationalAddresses: this.fb.array([]),
+      sdiCode: [""],
+      pecEmail: ["", [Validators.email]],
     });
 
     this.isBusinessClient.valueChanges.subscribe((isBusiness) => {
@@ -97,142 +101,93 @@ export class AddClient {
   }
 
   toggleClientType(isBusiness: boolean | null): void {
-    const email = this.clientForm.get("email");
-    const phoneNumber = this.clientForm.get("phoneNumber");
+    const privateClientFields = [
+      "firstName", "lastName", "fiscalCodePrivate", "birthDate",
+      "birthPlace", "nationality", "billingAddressPrivate"
+    ];
+    const businessClientFields = [
+      "companyName", "vatNumber", "fiscalCodeBusiness", "legalAddress",
+      "billingAddressBusiness", "operationalAddresses", "sdiCode", "pecEmail"
+    ];
 
-    const firstName = this.clientForm.get("firstName");
-    const lastName = this.clientForm.get("lastName");
-    const fiscalCodePrivate = this.clientForm.get("fiscalCodePrivate");
-    const birthDate = this.clientForm.get("birthDate");
-    const birthPlace = this.clientForm.get("birthPlace");
-    const nationality = this.clientForm.get("nationality");
-    const billingAddressPrivate = this.clientForm.get("billingAddressPrivate");
+    const emailControl = this.clientForm.get("email");
+    const phoneNumberControl = this.clientForm.get("phoneNumber");
 
-    const companyName = this.clientForm.get("companyName");
-    const vatNumber = this.clientForm.get("vatNumber");
-    const fiscalCodeBusiness = this.clientForm.get("fiscalCodeBusiness");
-    const legalAddress = this.clientForm.get("legalAddress");
-    const billingAddressBusiness = this.clientForm.get(
-      "billingAddressBusiness"
-    );
-    const operationalAddresses = this.clientForm.get("operationalAddresses");
-    const sdiCode = this.clientForm.get("sdiCode");
-    const pecEmail = this.clientForm.get("pecEmail");
+    const setValidatorsAndValidity = (fields: string[], required: boolean) => {
+      fields.forEach(field => {
+        const control = this.clientForm.get(field);
+        if (required) {
+          control?.setValidators(field === 'pecEmail' ? [Validators.required, Validators.email] : [Validators.required]);
+        } else {
+          control?.clearValidators();
+        }
+        control?.updateValueAndValidity();
+      });
+    };
 
     if (isBusiness) {
-      firstName?.disable();
-      lastName?.disable();
-      fiscalCodePrivate?.disable();
-      birthDate?.disable();
-      birthPlace?.disable();
-      nationality?.disable();
-      billingAddressPrivate?.disable();
-
-      companyName?.enable();
-      vatNumber?.enable();
-      fiscalCodeBusiness?.enable();
-      legalAddress?.enable();
-      billingAddressBusiness?.enable();
-      operationalAddresses?.enable();
-      sdiCode?.enable();
-      pecEmail?.enable();
-
-      companyName?.setValidators(Validators.required);
-      vatNumber?.setValidators(Validators.required);
-      fiscalCodeBusiness?.setValidators(Validators.required);
-      legalAddress?.setValidators(Validators.required);
-      billingAddressBusiness?.setValidators(Validators.required);
-
-      email?.setValidators([Validators.required, Validators.email]);
-      phoneNumber?.setValidators(Validators.required);
+      setValidatorsAndValidity(businessClientFields, true);
+      setValidatorsAndValidity(privateClientFields, false);
     } else {
-      firstName?.enable();
-      lastName?.enable();
-      fiscalCodePrivate?.enable();
-      birthDate?.enable();
-      birthPlace?.enable();
-      nationality?.enable();
-      billingAddressPrivate?.enable();
-
-      companyName?.disable();
-      vatNumber?.disable();
-      fiscalCodeBusiness?.disable();
-      legalAddress?.disable();
-      billingAddressBusiness?.disable();
-      operationalAddresses?.disable();
-      sdiCode?.disable();
-      pecEmail?.disable();
-
-      firstName?.setValidators(Validators.required);
-      lastName?.setValidators(Validators.required);
-      fiscalCodePrivate?.setValidators(Validators.required);
-      birthDate?.setValidators(Validators.required);
-      birthPlace?.setValidators(Validators.required);
-      nationality?.setValidators(Validators.required);
-      billingAddressPrivate?.setValidators(Validators.required);
-
-      email?.setValidators([Validators.required, Validators.email]);
-      phoneNumber?.setValidators(Validators.required);
+      setValidatorsAndValidity(privateClientFields, true);
+      setValidatorsAndValidity(businessClientFields, false);
     }
 
-    email?.updateValueAndValidity();
-    phoneNumber?.updateValueAndValidity();
-    firstName?.updateValueAndValidity();
-    lastName?.updateValueAndValidity();
-    fiscalCodePrivate?.updateValueAndValidity();
-    birthDate?.updateValueAndValidity();
-    birthPlace?.updateValueAndValidity();
-    nationality?.updateValueAndValidity();
-    billingAddressPrivate?.updateValueAndValidity();
-    companyName?.updateValueAndValidity();
-    vatNumber?.updateValueAndValidity();
-    fiscalCodeBusiness?.updateValueAndValidity();
-    legalAddress?.updateValueAndValidity();
-    billingAddressBusiness?.updateValueAndValidity();
-    operationalAddresses?.updateValueAndValidity();
-    sdiCode?.updateValueAndValidity();
-    pecEmail?.updateValueAndValidity();
+    emailControl?.setValidators([Validators.required, Validators.email]);
+    phoneNumberControl?.setValidators([Validators.required]);
+
+    emailControl?.updateValueAndValidity();
+    phoneNumberControl?.updateValueAndValidity();
   }
 
   onSubmit(): void {
-    if (this.clientForm.valid) {
-      if (this.isBusinessClient.value) {
-        const businessClient: BusinessClient = {
-          email: this.clientForm.value.email,
-          phoneNumber: this.clientForm.value.phoneNumber,
-          companyName: this.clientForm.value.companyName,
-          vatNumber: this.clientForm.value.vatNumber,
-          fiscalCode: this.clientForm.value.fiscalCodeBusiness,
-          legalAddress: this.clientForm.value.legalAddress,
-          billingAddress: this.clientForm.value.billingAddressBusiness,
-          operationalAddresses: this.clientForm.value.operationalAddresses,
-          sdiCode: this.clientForm.value.sdiCode,
-          pecEmail: this.clientForm.value.pecEmail,
-        };
-        this.clientsService.createBusinessClient(businessClient).subscribe(
-          (response) => console.log("Business Client Created:", response),
-          (error) => console.error("Error creating business client:", error)
-        );
-      } else {
-        const privateClient: PrivateClient = {
-          email: this.clientForm.value.email,
-          phoneNumber: this.clientForm.value.phoneNumber,
-          userId: 0, // TODO: Recuperare l'ID utente in modo appropriato
-          firstName: this.clientForm.value.firstName,
-          lastName: this.clientForm.value.lastName,
-          fiscalCode: this.clientForm.value.fiscalCodePrivate,
-          birthDate: this.clientForm.value.birthDate,
-          birthPlace: this.clientForm.value.birthPlace,
-          nationality: this.clientForm.value.nationality,
-          billingAddress: this.clientForm.value.billingAddressPrivate,
-        };
-        this.clientsService.createPrivateClient(privateClient).subscribe(
-          (response) => console.log("Private Client Created:", response),
-          (error) => console.error("Error creating private client:", error)
-        );
-      }
+    this.isLoading.set(true);
+    if (this.clientForm.invalid) {
+      this.clientForm.markAllAsTouched();
+      this.isLoading.set(false);
+      return;
+    }
+
+    const clientData = this.clientForm.value;
+    const handleSubscription = {
+      next: () => {
+        this.dialogService.close();
+        this.isLoading.set(false);
+      },
+      error: (error: any) => {
+        console.error("Error adding client:", error);
+        this.isLoading.set(false);
+      },
+    };
+
+    if (this.isBusinessClient.value) {
+      const businessClient: BusinessClient = {
+        companyName: clientData.companyName,
+        vatNumber: clientData.vatNumber,
+        fiscalCode: clientData.fiscalCodeBusiness,
+        legalAddress: clientData.legalAddress,
+        billingAddress: clientData.billingAddressBusiness,
+        operationalAddresses: clientData.operationalAddresses,
+        sdiCode: clientData.sdiCode,
+        pecEmail: clientData.pecEmail,
+        email: clientData.email,
+        phoneNumber: clientData.phoneNumber,
+      };
+      this.clientsService.addBusinessClient(businessClient).subscribe(handleSubscription);
     } else {
-      console.log("Form is invalid");
+      const privateClient: PrivateClient = {
+        firstName: clientData.firstName,
+        lastName: clientData.lastName,
+        userId: 0,
+        fiscalCode: clientData.fiscalCodePrivate,
+        birthDate: clientData.birthDate,
+        birthPlace: clientData.birthPlace,
+        nationality: clientData.nationality,
+        billingAddress: clientData.billingAddressPrivate,
+        email: clientData.email,
+        phoneNumber: clientData.phoneNumber,
+      };
+      this.clientsService.addPrivateClient(privateClient).subscribe(handleSubscription);
     }
   }
 }

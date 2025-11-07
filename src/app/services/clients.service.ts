@@ -15,7 +15,7 @@ export interface CustomerPage {
   content: Customer[];
   page: {
     size: number;
-    number: number;
+    currentPage: number;
     totalElements: number;
     totalPages: number;
   };
@@ -41,11 +41,11 @@ export class ClientsService {
     return this.http.get<CustomerPage>(this.apiUrl, { params: filter as any});
   }
 
-  createPrivateClient(client: PrivateClient): Observable<PrivateClient> {
+  addPrivateClient(client: PrivateClient): Observable<PrivateClient> {
     return this.http.post<PrivateClient>(this.privateClientUrl, client);
   }
 
-  createBusinessClient(client: BusinessClient): Observable<BusinessClient> {
+  addBusinessClient(client: BusinessClient): Observable<BusinessClient> {
     return this.http.post<BusinessClient>(this.businessClientUrl, client);
   }
 }

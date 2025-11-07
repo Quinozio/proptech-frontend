@@ -1,26 +1,26 @@
-import { Component, inject, OnInit, signal } from "@angular/core";
-import { ClientFiltersComponent } from "@proptech/components/clients/client-filters/client-filters.component";
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ClientFiltersComponent } from '@proptech/components/clients/client-filters/client-filters.component';
 import {
   ClientsService,
   Customer,
   CustomerFilter,
   CustomerPage,
-} from "../../services/clients.service";
-import { DialogService } from "@proptech/services/dialog.service";
-import { AddClient } from "@proptech/components/clients/add-client/add-client";
-import { Column, TableComponent } from "@proptech/components/ui/table/table.component";
-import { ButtonComponent } from "@proptech/components/ui/button/button.component";
+} from '../../services/clients.service';
+import { DialogService } from '@proptech/services/dialog.service';
+import { AddClient } from '@proptech/components/clients/add-client/add-client';
+import { Column, TableComponent } from '@proptech/components/ui/table/table.component';
+import { ButtonComponent } from '@proptech/components/ui/button/button.component';
 
 @Component({
-  selector: "app-clients",
+  selector: 'app-clients',
   standalone: true,
   imports: [ClientFiltersComponent, TableComponent, ButtonComponent],
-  templateUrl: "./clients.component.html",
-  styleUrl: "./clients.component.scss",
+  templateUrl: './clients.component.html',
+  styleUrl: './clients.component.scss',
 })
 export class ClientsComponent implements OnInit {
   clients = signal<Customer[]>([]);
-  currentPage = signal<number>(0);
+  currentPage = signal<number>(1);
   pageSize = signal<number>(1);
   totalElements = signal<number>(0);
   totalPages = signal<number>(0);
@@ -44,23 +44,19 @@ export class ClientsComponent implements OnInit {
     this.clientsService.getCustomers(filter).subscribe({
       next: (data: CustomerPage) => {
         this.clients.set(data.content);
-        this.currentPage.set(data.page.number);
+        this.currentPage.set(data.page.currentPage);
         this.pageSize.set(data.page.size);
         this.totalElements.set(data.page.totalElements);
         this.totalPages.set(data.page.totalPages);
       },
       error: (err) => {
-        console.error("Error loading clients", err);
+        console.error('Error loading clients', err);
       },
     });
   }
 
-  onPreviousPage(): void {
-    this.currentPage.update((page) => Math.max(0, page - 1));
-    this.loadClients();
-  }
-
   onPageChange(newPage: number): void {
+    console.log(newPage);
     this.currentPage.set(newPage);
     this.loadClients();
   }
@@ -69,9 +65,9 @@ export class ClientsComponent implements OnInit {
     this.dialogService.open(AddClient, { title: 'Crea cliente' });
   }
 
-  clientColumnDefinitions: Column[] = [
-    { field: "displayName", header: "Nome" },
-    { field: "email", header: "Email" },
-    { field: "customerType", header: "Modalità di pagamento predefinita" },
+  clientColumnDefinitions: Column<Customer>[] = [
+    { field: 'displayName', header: 'Nome' },
+    { field: 'email', header: 'Email' },
+    { field: 'customerType', header: 'Modalità di pagamento predefinita' },
   ];
 }

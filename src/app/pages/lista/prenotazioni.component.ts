@@ -25,13 +25,13 @@ export class PrenotazioniComponent {
   ];
 
   tableColumns = [
-    { field: 'importo', header: 'Importo' },
-    { field: 'modalita', header: 'Modalità di pagamento' },
-    { field: 'descrizione', header: 'Descrizione' },
-    { field: 'cliente', header: 'Cliente' },
-    { field: 'data', header: 'Data' },
-    { field: 'dataRimborso', header: 'Data rimborso' },
-    { field: 'motivoRifiuto', header: 'Motivo del rifiuto' },
+    // { field: 'importo', header: 'Importo' },
+    // { field: 'modalita', header: 'Modalità di pagamento' },
+    // { field: 'descrizione', header: 'Descrizione' },
+    // { field: 'cliente', header: 'Cliente' },
+    // { field: 'data', header: 'Data' },
+    // { field: 'dataRimborso', header: 'Data rimborso' },
+    // { field: 'motivoRifiuto', header: 'Motivo del rifiuto' },
   ];
 
   currentPage: number = 1;
