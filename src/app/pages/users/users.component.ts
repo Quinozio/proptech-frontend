@@ -15,7 +15,7 @@ import { ButtonComponent } from '@proptech/components/ui/button/button.component
 })
 export class UsersComponent implements OnInit {
   users = signal<User[]>([]);
-  currentPage = signal<number>(0);
+  currentPage = signal<number>(1);
   pageSize = signal<number>(1);
   totalElements = signal<number>(0);
   totalPages = signal<number>(0);

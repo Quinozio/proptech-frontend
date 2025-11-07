@@ -1,7 +1,7 @@
-import { Injectable, signal } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { environment } from "@environments/environment";
+import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 
 export interface Permission {
   id: number;
@@ -47,7 +47,7 @@ export interface CreateUser {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UsersService {
   private apiUrl = `/api/v1/users`;
@@ -61,7 +61,9 @@ export class UsersService {
   }
 
   getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(this.apiRolesUrl);
+    return this.http
+      .get<{ content: Role[] }>(this.apiRolesUrl)
+      .pipe(map((response) => response.content));
   }
 
   createUser(user: CreateUser): Observable<User> {
