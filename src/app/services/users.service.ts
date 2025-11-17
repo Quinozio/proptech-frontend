@@ -27,7 +27,7 @@ export interface UserPage {
   content: User[];
   page: {
     size: number;
-    number: number;
+    currentPage: number;
     totalElements: number;
     totalPages: number;
   };

@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers(filter).subscribe({
       next: (data: UserPage) => {
         this.users.set(data.content);
-        this.currentPage.set(data.page.number);
+        this.currentPage.set(data.page.currentPage);
         this.pageSize.set(data.page.size);
         this.totalElements.set(data.page.totalElements);
         this.totalPages.set(data.page.totalPages);
@@ -48,6 +48,11 @@ export class UsersComponent implements OnInit {
         console.error('Error loading users', err);
       },
     });
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage.set(newPage);
+    this.loadUsers();
   }
 
   onPreviousPage(): void {
